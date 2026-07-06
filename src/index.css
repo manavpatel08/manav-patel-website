@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body, #root {
+  background: #0C0C0C;
+  font-family: 'Kanit', sans-serif;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(182, 0, 168, 0.35);
+  color: #D7E2EA;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0C0C0C;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  border-radius: 999px;
+}
+
+/* ── Gradient heading ── */
+.hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glassmorphism card ── */
+.glass-card {
+  background: rgba(215, 226, 234, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(215, 226, 234, 0.08);
+}
+
+/* ── Gradient border (animated on hover) ── */
+.gradient-border {
+  position: relative;
+  background: rgba(215, 226, 234, 0.03);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(182, 0, 168, 0.3),
+    rgba(118, 33, 176, 0.3),
+    rgba(100, 105, 115, 0.15)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ── Glow on hover ── */
+.glow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(182, 0, 168, 0.15), 0 0 60px rgba(118, 33, 176, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ── Noise texture overlay ── */
+.global-noise {
+  position: fixed;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+/* ── Scroll progress bar ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #B600A8, #7621B0, #BE4C00);
+  transform-origin: 0%;
+  z-index: 9999;
+}
+
+/* ── Floating blob animation ── */
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+.blob {
+  animation: blob-float 12s ease-in-out infinite;
+  filter: blur(80px);
+  opacity: 0.07;
+}
+
+/* ── Grid background ── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(215, 226, 234, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 226, 234, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* ── Skill pill ── */
+.skill-pill {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.skill-pill:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 20px rgba(182, 0, 168, 0.12);
+}
+
+/* ── Active nav link ── */
+.nav-active {
+  opacity: 1 !important;
+  color: #B600A8 !important;
+}
+
+/* ── Section backgrounds ── */
+.bg-section-hero {
+  background: #050505;
+}
+
+.bg-section-about {
+  /* Dark graphite with soft purple radial glow */
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(118, 33, 176, 0.08) 0%, transparent 70%),
+    #0A0A0D;
+}
+
+.bg-section-skills {
+  /* Charcoal with faint blueprint grid */
+  background-color: #0E0E12;
+  background-image: 
+    linear-gradient(rgba(215, 226, 234, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 226, 234, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-section-experience {
+  background: #F8F9FA;
+}
+
+.bg-section-projects {
+  /* Dark navy with blue ambient lighting */
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(59, 130, 246, 0.06) 0%, transparent 60%),
+    #070A14;
+}
+
+.bg-section-philosophy {
+  /* Architectural dark grid for new section */
+  background-color: #050608;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.bg-section-contact {
+  /* Purple/orange gradient mesh */
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(182, 0, 168, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 50%, rgba(190, 76, 0, 0.08) 0%, transparent 50%),
+    #0A0A0D;
+}
+
+.bg-section-footer {
+  background: #FFFFFF;
+}
+
+/* ── Section divider gradient ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(182, 0, 168, 0.3) 50%, transparent 100%);
+}
