@@ -4,4 +4,17 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api/leetcode': {
+        target: 'https://leetcode.com',
+        changeOrigin: true,
+        rewrite: () => '/graphql',
+        headers: {
+          Referer: 'https://leetcode.com',
+          Origin: 'https://leetcode.com',
+        },
+      },
+    },
+  },
 })

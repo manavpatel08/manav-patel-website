@@ -20,7 +20,7 @@ export const profile = {
 };
 
 export const aboutSummary =
-  "I'm a Computer Science student at PDEU building full-stack systems that solve real problems, not just tick boxes. I care about the why behind architecture decisions — schema design, API contracts, caching, scalability — as much as the code itself.\n\nI've built CodeSync, a real-time collaborative code editor with sub-100ms sync latency, and JobKart.ai, an AI-powered job-matching platform that cuts search time by 60–70%. Currently interning at AdaniConneX, working on infrastructure automation for enterprise data centers.\n\nWhen I'm not coding, I'm probably solving a Codeforces problem or reading up on system design.";
+  "I'm a Computer Science student at Pandit Deendayal Energy University focused on building scalable backend systems and distributed applications. I enjoy designing systems from the ground up and understanding the engineering tradeoffs behind architecture, including data modeling, API design, concurrency, caching, fault tolerance, scalability, and performance.\n\nI've built CodeSync, a real time collaborative code editor designed around distributed state synchronization, CRDTs, WebSockets, persistent storage, and sandboxed code execution. I'm currently interning at AdaniConneX, working on infrastructure automation and systems for monitoring and managing enterprise data center infrastructure.\n\nI'm particularly interested in backend engineering, distributed systems, system design, and high performance C++. Outside of development, I spend my time solving Codeforces problems and studying how large scale systems are designed and built.";
 
 export const aboutHighlights = [
   {
@@ -172,14 +172,38 @@ export const skills = {
 
 export const stats = [
   { value: 9.37, label: 'CPI at PDEU', suffix: '/10', decimals: 2 },
-  { value: 1327, label: 'Codeforces Rating', suffix: '', decimals: 0 },
-  { value: 1554, label: 'LeetCode Rating', suffix: '', decimals: 0 },
+  { value: 1629, label: 'Codeforces Rating', suffix: '', decimals: 0 },
+  { value: 1924, label: 'LeetCode Rating', suffix: '', decimals: 0 },
   { value: 3, label: 'Major Projects Built', suffix: '+', decimals: 0 },
 ];
 
 export const achievements = [
-  { platform: 'Codeforces', handle: 'manavp8', url: 'https://codeforces.com/profile/manavp8' },
-  { platform: 'LeetCode', handle: '__Manav_Patel', url: 'https://leetcode.com/u/__Manav_Patel/' },
+  {
+    platform: 'Codeforces',
+    handle: 'manavp8',
+    url: 'https://codeforces.com/profile/manavp8',
+    rating: 1629,
+    rank: 'Expert',
+    color: '#3b82f6',
+    contests: [
+      { name: 'Codeforces Round 1114 (Div. 3)', rank: 558 },
+      { name: 'Codeforces Round 1109 (Div. 3)', rank: 884 },
+    ],
+  },
+  {
+    platform: 'LeetCode',
+    handle: '__Manav_Patel',
+    url: 'https://leetcode.com/u/__Manav_Patel/',
+    rating: 1924,
+    rank: 'Knight',
+    percentile: 'Top 4% Globally',
+    color: '#fb923c',
+    contests: [
+      { name: 'BiWeekly Contest 187', rank: 491 },
+      { name: 'BiWeekly Contest 188', rank: 669 },
+      { name: 'Weekly Contest 509', rank: 894 },
+    ],
+  },
 ];
 
 export const techMarqueeRow1 = [

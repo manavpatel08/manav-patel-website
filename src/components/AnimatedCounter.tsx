@@ -8,6 +8,7 @@ interface AnimatedCounterProps {
   decimals?: number;
   duration?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
@@ -17,6 +18,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   decimals = 0,
   duration = 2000,
   className = '',
+  style,
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
@@ -48,7 +50,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   }, [isInView, value, duration]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={className} style={style}>
       {prefix}
       {displayValue.toFixed(decimals)}
       {suffix}
