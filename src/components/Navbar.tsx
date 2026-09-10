@@ -1,42 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { navLinks } from '../data/resumeData';
+import { navLinks, profile } from '../data/resumeData';
+import { ArrowUpRight } from 'lucide-react';
 
 const Navbar: React.FC = () => {
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('about');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 50);
+
+      // Robust scroll-spy across all 7 sections
+      const sections = navLinks.map((link) => link.toLowerCase());
+      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          return;
+        }
+      }
+
+      if (window.scrollY < 200) {
+        setActiveSection('about');
+      }
     };
-
-    const observers: IntersectionObserver[] = [];
-
-    navLinks.forEach((link) => {
-      const id = link.toLowerCase();
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    return () => {
-      observers.forEach((o) => o.disconnect());
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -45,20 +40,21 @@ const Navbar: React.FC = () => {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
       setIsMobileOpen(false);
+      setActiveSection(id);
     }
   };
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 select-none ${
           isScrolled
-            ? 'py-3 px-6 md:px-10 bg-[#0C0C0C]/80 backdrop-blur-xl border-b border-white/5'
-            : 'py-6 md:py-8 px-6 md:px-10 bg-transparent'
+            ? 'py-3 sm:py-3.5 px-6 md:px-12 bg-[#F4F0E8]/95 backdrop-blur-md border-b border-black/8 shadow-sm shadow-black/[0.02]'
+            : 'py-5 sm:py-6 px-6 md:px-12 bg-[#F4F0E8]/70 backdrop-blur-xs border-b border-black/5'
         }`}
       >
-        <div className="flex items-center justify-between">
-          {/* Logo / Name */}
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          {/* Brand / Logo */}
           <a
             href="#"
             onClick={(e) => {
@@ -66,86 +62,137 @@ const Navbar: React.FC = () => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
               setIsMobileOpen(false);
             }}
-            className="text-[#D7E2EA] font-bold text-lg sm:text-xl tracking-wider uppercase hover:opacity-70 transition-opacity duration-200"
+            className="text-[#141413] font-bold text-base sm:text-lg tracking-wider uppercase hover:opacity-80 transition-opacity font-mono flex items-center gap-2"
           >
-            MP
+            <span className="w-2 h-2 rounded-full bg-[#BD5338]" />
+            <span>MANAV PATEL</span>
           </a>
 
-          <div className="hidden md:flex items-center gap-8 lg:gap-12">
-            {navLinks.map((link) => {
-              const id = link.toLowerCase();
-              return (
-                <a
-                  key={link}
-                  href={`#${id}`}
-                  onClick={(e) => handleClick(e, id)}
-                  className={`relative group font-medium uppercase tracking-wider text-sm lg:text-[1rem] transition-all duration-300 ${
-                    activeSection === id ? 'text-[#D7E2EA]' : 'text-[#D7E2EA]/60 hover:text-[#D7E2EA]'
-                  }`}
-                >
-                  {link}
-                  <span 
-                    className={`absolute -bottom-1.5 left-0 w-full h-[2px] bg-gradient-to-r from-[#B600A8] to-[#7621B0] origin-left transition-transform duration-300 ease-out ${
-                      activeSection === id ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                    }`} 
-                  />
-                </a>
-              );
-            })}
+          {/* Desktop Navigation Links + Minimal Resume Button */}
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+            <nav className="flex items-center gap-6 xl:gap-7">
+              {navLinks.map((link) => {
+                const id = link.toLowerCase();
+                const isActive = activeSection === id;
+                return (
+                  <a
+                    key={link}
+                    href={`#${id}`}
+                    onClick={(e) => handleClick(e, id)}
+                    className={`relative py-1 font-mono uppercase text-xs tracking-wider transition-colors duration-150 ${
+                      isActive
+                        ? 'text-[#141413] font-bold'
+                        : 'text-[#57606A] hover:text-[#141413]'
+                    }`}
+                  >
+                    <span>{link}</span>
+                    {/* Subtle Solid Accent Underline (NO GRADIENT) */}
+                    <span
+                      className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#BD5338] origin-left transition-transform duration-200 ease-out ${
+                        isActive ? 'scale-x-100' : 'scale-x-0'
+                      }`}
+                    />
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* Minimal Prominent Resume Header Button */}
+            <div className="pl-2 border-l border-black/10 flex items-center">
+              <a
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-black/15 bg-white text-[#141413] hover:border-black/30 hover:bg-[#FDFBF7] transition-all font-mono text-xs uppercase tracking-wider font-semibold shadow-xs"
+              >
+                <span>Resume</span>
+                <ArrowUpRight className="w-3 h-3 text-[#BD5338]" />
+              </a>
+            </div>
           </div>
 
           {/* Mobile hamburger */}
-          <button
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="md:hidden flex flex-col gap-1.5 cursor-pointer z-50"
-            aria-label="Toggle navigation menu"
-          >
-            <span
-              className={`w-6 h-0.5 bg-[#D7E2EA] transition-all duration-300 ${
-                isMobileOpen ? 'rotate-45 translate-y-2' : ''
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-[#D7E2EA] transition-all duration-300 ${
-                isMobileOpen ? 'opacity-0' : ''
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-[#D7E2EA] transition-all duration-300 ${
-                isMobileOpen ? '-rotate-45 -translate-y-2' : ''
-              }`}
-            />
-          </button>
+          <div className="flex items-center gap-3 lg:hidden">
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-black/15 bg-white text-[#141413] font-mono text-[11px] uppercase tracking-wider font-semibold"
+            >
+              <span>Resume</span>
+              <ArrowUpRight className="w-3 h-3 text-[#BD5338]" />
+            </a>
+
+            <button
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="flex flex-col gap-1.5 cursor-pointer z-50 p-2"
+              aria-label="Toggle navigation menu"
+            >
+              <span
+                className={`w-5 h-0.5 bg-[#141413] transition-all duration-300 ${
+                  isMobileOpen ? 'rotate-45 translate-y-2' : ''
+                }`}
+              />
+              <span
+                className={`w-5 h-0.5 bg-[#141413] transition-all duration-300 ${
+                  isMobileOpen ? 'opacity-0' : ''
+                }`}
+              />
+              <span
+                className={`w-5 h-0.5 bg-[#141413] transition-all duration-300 ${
+                  isMobileOpen ? '-rotate-45 -translate-y-2' : ''
+                }`}
+              />
+            </button>
+          </div>
         </div>
-      </nav>
+      </header>
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-[#0C0C0C]/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 transition-all duration-500 md:hidden ${
+        className={`fixed inset-0 z-40 bg-[#F4F0E8]/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 transition-all duration-300 lg:hidden ${
           isMobileOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
         }`}
       >
+        <div className="text-[10px] font-mono uppercase tracking-widest text-[#8C959F] mb-2">
+          SYSTEM MODULE NAVIGATION
+        </div>
+
         {navLinks.map((link, i) => {
           const id = link.toLowerCase();
+          const isActive = activeSection === id;
           return (
             <a
               key={link}
               href={`#${id}`}
               onClick={(e) => handleClick(e, id)}
-              className={`text-[#D7E2EA] font-bold uppercase tracking-widest text-2xl hover:opacity-70 transition-all duration-200 ${
-                activeSection === id ? 'nav-active' : 'opacity-60'
+              className={`font-mono font-bold uppercase tracking-widest text-xl transition-all duration-200 flex items-center gap-2 ${
+                isActive ? 'text-[#BD5338]' : 'text-[#141413] hover:text-[#BD5338]'
               }`}
               style={{
-                transitionDelay: isMobileOpen ? `${i * 80}ms` : '0ms',
-                transform: isMobileOpen ? 'translateY(0)' : 'translateY(20px)',
+                transitionDelay: isMobileOpen ? `${i * 40}ms` : '0ms',
+                transform: isMobileOpen ? 'translateY(0)' : 'translateY(16px)',
               }}
             >
-              {link}
+              <span className="text-xs text-[#8C959F]">0{i + 1}</span>
+              <span>{link}</span>
             </a>
           );
         })}
+
+        <div className="pt-4 border-t border-black/10 mt-2">
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#141413] text-[#F4F0E8] font-mono text-xs uppercase tracking-wider font-bold shadow-sm"
+          >
+            <span>Open Resume (PDF)</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#BD5338]" />
+          </a>
+        </div>
       </div>
     </>
   );

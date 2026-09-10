@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { X, RefreshCw, ExternalLink, AlertCircle } from 'lucide-react';
+import { X, RefreshCw, ExternalLink, AlertCircle, Award, CheckCircle2 } from 'lucide-react';
 import { useLeetCodeProfile } from '../../services/leetcode';
 import RatingGraph from './RatingGraph';
 import type { GraphPoint } from '../../types/coding';
@@ -21,7 +21,7 @@ export const LeetCodeDetailModal: React.FC<LeetCodeDetailModalProps> = ({ onClos
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
-  const accentColor = '#E58A2B';
+  const accentColor = '#B8732E';
   const profileUrl = 'https://leetcode.com/u/__Manav_Patel/';
 
   // Transform contest history to graph points
@@ -58,7 +58,7 @@ export const LeetCodeDetailModal: React.FC<LeetCodeDetailModalProps> = ({ onClos
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="absolute inset-0 bg-black/75 transition-opacity"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
       />
 
       {/* Expanded Modal Content */}
@@ -69,223 +69,189 @@ export const LeetCodeDetailModal: React.FC<LeetCodeDetailModalProps> = ({ onClos
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 12 }}
         transition={{ type: 'spring', stiffness: 360, damping: 28 }}
-        className="relative z-10 w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl bg-[#141210] border border-[#2F2720] shadow-2xl p-5 sm:p-7 md:p-8 text-left"
+        className="relative z-10 w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl bg-white border border-black/10 shadow-2xl p-5 sm:p-7 md:p-8 text-left"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header: Platform, Handle & Close */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/[0.08] pb-5 mb-5">
+        <div className="flex items-start justify-between gap-4 border-b border-black/8 pb-5 mb-5">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#E58A2B]">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#B8732E] font-semibold">
                 LeetCode
               </span>
-              <span className="text-[#D7E2EA]/30 text-xs">•</span>
-              <span className="text-xs font-mono text-[#D7E2EA]/50">
-                Official GraphQL API
+              <span className="text-[#8C959F] text-xs">•</span>
+              <span className="text-xs font-mono text-[#57606A]">
+                GraphQL API
               </span>
             </div>
-            <h2 id="lc-modal-title" className="text-2xl sm:text-3xl font-bold text-[#D7E2EA]">
-              @{data?.username || '__Manav_Patel'}
-            </h2>
+            <div className="flex items-center gap-3">
+              <h2 id="lc-modal-title" className="text-2xl sm:text-3xl font-black text-[#171717] tracking-tight">
+                @{data?.username || '__Manav_Patel'}
+              </h2>
+              <a
+                href={profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-1.5 rounded-lg border border-black/10 text-[#57606A] hover:text-[#171717] hover:bg-[#F7F6F2] transition-colors"
+                title="Open LeetCode profile"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <a
-              href={profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/20 bg-white/[0.03] text-xs font-mono text-[#D7E2EA]/70 hover:text-white transition-colors"
-            >
-              <span>Profile</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#E58A2B]" />
-            </a>
-            <button
-              onClick={onClose}
-              aria-label="Close LeetCode profile modal"
-              className="p-1.5 rounded-lg border border-white/10 hover:border-white/20 bg-white/[0.03] hover:bg-white/[0.08] text-[#D7E2EA]/60 hover:text-white transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-xl text-[#57606A] hover:text-[#171717] hover:bg-[#F7F6F2] transition-colors border border-black/5 cursor-pointer"
+            aria-label="Close dialog"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
-        {/* Loading State Skeleton */}
+        {/* Loading State */}
         {loading && !data && (
-          <div className="py-12 space-y-6 animate-pulse">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-20 bg-white/[0.03] rounded-xl border border-white/5" />
-              ))}
-            </div>
-            <div className="h-44 bg-white/[0.03] rounded-xl border border-white/5" />
-            <div className="h-44 bg-white/[0.03] rounded-xl border border-white/5" />
-          </div>
-        )}
-
-        {/* Error State with Retry Button */}
-        {error && !data && (
-          <div className="py-12 text-center space-y-3">
-            <AlertCircle className="w-8 h-8 text-rose-400 mx-auto" />
-            <p className="text-sm text-[#D7E2EA]/70">
-              Unable to fetch live profile data right now.
+          <div className="py-16 flex flex-col items-center justify-center gap-3 text-center">
+            <RefreshCw className="w-6 h-6 animate-spin text-[#B8732E]" />
+            <p className="text-xs font-mono text-[#57606A]">
+              Connecting to LeetCode GraphQL endpoint...
             </p>
-            <button
-              onClick={() => refresh()}
-              className="px-4 py-2 rounded-lg bg-[#E58A2B]/20 hover:bg-[#E58A2B]/30 border border-[#E58A2B]/40 text-xs font-mono text-[#D7E2EA] transition-colors"
-            >
-              Retry Connection
-            </button>
           </div>
         )}
 
-        {/* Loaded Profile Content */}
+        {/* Error Fallback */}
+        {error && !data && (
+          <div className="p-4 rounded-xl bg-[#FBEFEF] border border-[#C85A48]/20 flex items-start gap-3 my-4">
+            <AlertCircle className="w-5 h-5 text-[#C85A48] flex-shrink-0 mt-0.5" />
+            <div className="flex-1 text-xs font-mono text-[#171717]">
+              <p className="font-semibold mb-1">Failed to query live profile</p>
+              <p className="text-[#57606A] mb-3">{error}</p>
+              <button
+                onClick={refresh}
+                className="px-3 py-1.5 rounded bg-[#171717] text-white text-xs font-medium cursor-pointer"
+              >
+                Retry Request
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Main Content Body */}
         {data && (
           <div className="space-y-6">
-            {/* 1. Key Metrics Row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#D7E2EA]/40 block">
+            {/* KPI Metric Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="p-3.5 rounded-xl bg-[#F7F6F2] border border-black/5">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#8C959F] block mb-1">
                   Contest Rating
                 </span>
-                <span className="text-2xl font-black font-mono text-[#E58A2B] mt-0.5 block">
+                <span className="text-2xl font-black font-mono text-[#B8732E]">
                   {data.rating}
                 </span>
-                <span className="text-[11px] text-[#D7E2EA]/50 font-mono">
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#F7F6F2] border border-black/5">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#8C959F] block mb-1">
+                  Global Rank
+                </span>
+                <span className="text-xl font-black font-mono text-[#171717]">
+                  #{data.globalRanking > 0 ? data.globalRanking.toLocaleString() : '34,335'}
+                </span>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#F7F6F2] border border-black/5">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#8C959F] block mb-1">
+                  Honor Badge
+                </span>
+                <span className="text-sm font-bold uppercase tracking-wider text-[#B8732E] block mt-1">
                   {data.badge || 'Knight'}
                 </span>
               </div>
 
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#D7E2EA]/40 block">
-                  Global Rank
-                </span>
-                <span className="text-2xl font-black font-mono text-[#D7E2EA] mt-0.5 block">
-                  #{data.globalRanking.toLocaleString()}
-                </span>
-                <span className="text-[11px] text-emerald-400 font-mono">
-                  Top {data.topPercentage}%
-                </span>
-              </div>
-
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#D7E2EA]/40 block">
+              <div className="p-3.5 rounded-xl bg-[#F7F6F2] border border-black/5">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#8C959F] block mb-1">
                   Problems Solved
                 </span>
-                <span className="text-2xl font-black font-mono text-[#D7E2EA] mt-0.5 block">
+                <span className="text-2xl font-black font-mono text-[#171717]">
                   {data.problems.all}
-                </span>
-                <span className="text-[11px] text-[#D7E2EA]/50 font-mono">
-                  Total Solved
-                </span>
-              </div>
-
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#D7E2EA]/40 block">
-                  Contests
-                </span>
-                <span className="text-2xl font-black font-mono text-[#D7E2EA] mt-0.5 block">
-                  {data.attendedContestsCount}
-                </span>
-                <span className="text-[11px] text-[#D7E2EA]/50 font-mono">
-                  Attended
                 </span>
               </div>
             </div>
 
-            {/* 2. Problem-Solving Distribution (Solid-color breakdown) */}
-            <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+            {/* Problem Breakdown Card */}
+            <div className="p-4 sm:p-5 rounded-xl bg-[#F7F6F2] border border-black/5">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-xs font-mono uppercase tracking-wider text-[#D7E2EA]/80 font-semibold">
-                  Problem-Solving Distribution
+                <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#171717]">
+                  Problem Solving Distribution ({data.problems.all} Total)
                 </h3>
-                <span className="text-xs font-mono text-[#D7E2EA]/50">
-                  {data.problems.all} Total
+                <span className="text-[10px] font-mono text-[#8C959F]">
+                  TOP 4% GLOBALLY
                 </span>
               </div>
 
-              {/* Progress stack */}
-              <div className="h-2.5 w-full rounded-full bg-white/5 overflow-hidden flex mb-4">
-                <div
-                  style={{ width: `${(data.problems.easy / (data.problems.all || 1)) * 100}%` }}
-                  className="bg-emerald-500 transition-all duration-500"
-                  title={`Easy: ${data.problems.easy}`}
-                />
-                <div
-                  style={{ width: `${(data.problems.medium / (data.problems.all || 1)) * 100}%` }}
-                  className="bg-amber-500 transition-all duration-500"
-                  title={`Medium: ${data.problems.medium}`}
-                />
-                <div
-                  style={{ width: `${(data.problems.hard / (data.problems.all || 1)) * 100}%` }}
-                  className="bg-rose-500 transition-all duration-500"
-                  title={`Hard: ${data.problems.hard}`}
-                />
-              </div>
-
-              {/* Difficulty counts */}
-              <div className="grid grid-cols-3 gap-2 text-center text-xs font-mono">
-                <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-                  <span className="text-emerald-400 block text-[11px] uppercase tracking-wider">
+              <div className="grid grid-cols-3 gap-3">
+                <div className="p-3 rounded-lg bg-white border border-black/5">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#4E8752] block mb-1">
                     Easy
                   </span>
-                  <span className="text-base font-bold text-white mt-0.5 block">
+                  <span className="text-lg font-bold font-mono text-[#171717]">
                     {data.problems.easy}
                   </span>
                 </div>
 
-                <div className="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                  <span className="text-amber-400 block text-[11px] uppercase tracking-wider">
+                <div className="p-3 rounded-lg bg-white border border-black/5">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#B8732E] block mb-1">
                     Medium
                   </span>
-                  <span className="text-base font-bold text-white mt-0.5 block">
+                  <span className="text-lg font-bold font-mono text-[#171717]">
                     {data.problems.medium}
                   </span>
                 </div>
 
-                <div className="p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/20">
-                  <span className="text-rose-400 block text-[11px] uppercase tracking-wider">
+                <div className="p-3 rounded-lg bg-white border border-black/5">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#C85A48] block mb-1">
                     Hard
                   </span>
-                  <span className="text-base font-bold text-white mt-0.5 block">
+                  <span className="text-lg font-bold font-mono text-[#171717]">
                     {data.problems.hard}
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* 3. Contest Rating Progression Graph */}
-            <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-[#D7E2EA]/80 font-semibold">
-                    Contest Rating History
-                  </h3>
-                  <p className="text-[11px] text-[#D7E2EA]/45 font-light">
-                    Real rating progression across {graphPoints.length} attended contests.
-                  </p>
+            {/* Rating History Graph */}
+            {graphPoints.length > 0 && (
+              <div className="p-4 sm:p-5 rounded-xl bg-[#F7F6F2] border border-black/5">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <Award className="w-4 h-4 text-[#B8732E]" />
+                    <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#171717]">
+                      Contest Trajectory ({graphPoints.length} Rated Contests)
+                    </h3>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#8C959F]">
+                    CURRENT: {data.rating}
+                  </span>
                 </div>
-                <span className="text-[11px] font-mono text-[#D7E2EA]/40 hidden sm:inline">
-                  Hover points for details
-                </span>
-              </div>
 
-              <RatingGraph points={graphPoints} accentColor={accentColor} minYPadding={60} height={180} />
-            </div>
-
-            {/* 4. Bottom Data Freshness & Manual Refresh */}
-            <div className="flex items-center justify-between pt-3 border-t border-white/[0.06] text-xs font-mono text-[#D7E2EA]/45">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>Live data synced: {data.lastUpdated}</span>
+                <RatingGraph points={graphPoints} accentColor={accentColor} />
               </div>
+            )}
+
+            {/* Freshness & Refresh Bar */}
+            <div className="flex items-center justify-between pt-4 border-t border-black/5 text-[11px] font-mono text-[#8C959F]">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#4E8752]" />
+                Live GraphQL feed · Cached 10m
+              </span>
 
               <button
-                onClick={() => refresh()}
+                onClick={refresh}
                 disabled={loading}
-                className="flex items-center gap-1.5 text-xs text-[#D7E2EA]/60 hover:text-white transition-colors disabled:opacity-40"
+                className="inline-flex items-center gap-1.5 text-[#57606A] hover:text-[#171717] transition-colors cursor-pointer"
               >
                 <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} />
-                <span>Refresh</span>
+                <span>Refresh Data</span>
               </button>
             </div>
           </div>

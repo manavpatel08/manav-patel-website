@@ -15,11 +15,16 @@ export const RatingGraph: React.FC<RatingGraphProps> = ({
   height = 200,
 }) => {
   const [hoveredPoint, setHoveredPoint] = useState<GraphPoint | null>(null);
+  const [pinnedPoint, setPinnedPoint] = useState<GraphPoint | null>(null);
   const [hoverPos, setHoverPos] = useState<{ x: number; y: number } | null>(null);
+  const [pinnedPos, setPinnedPos] = useState<{ x: number; y: number } | null>(null);
+
+  const activePoint = hoveredPoint || pinnedPoint;
+  const activePos = hoveredPoint ? hoverPos : pinnedPos;
 
   if (!points || points.length === 0) {
     return (
-      <div className="w-full h-44 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-center text-xs font-mono text-[#D7E2EA]/40">
+      <div className="w-full h-44 rounded-xl bg-[#F7F6F2] border border-black/8 flex items-center justify-center text-xs font-mono text-[#57606A]">
         No rating history available
       </div>
     );
@@ -63,11 +68,7 @@ export const RatingGraph: React.FC<RatingGraphProps> = ({
     return `${acc} L ${curr.x} ${curr.y}`;
   }, '');
 
-  // Subtle Area fill path
-  const firstX = coords[0].x;
-  const lastX = coords[coords.length - 1].x;
   const baselineY = padTop + chartHeight;
-  const areaPath = `${linePath} L ${lastX} ${baselineY} L ${firstX} ${baselineY} Z`;
 
   // Grid tick marks (3 horizontal guidelines)
   const midRating = Math.round((minRating + maxRating) / 2 / 50) * 50;
@@ -79,19 +80,11 @@ export const RatingGraph: React.FC<RatingGraphProps> = ({
 
   return (
     <div className="relative w-full select-none">
-      <div className="relative w-full overflow-x-auto pb-1">
+      <div className="relative w-full overflow-visible pb-1">
         <svg
           viewBox={`0 0 ${svgWidth} ${svgHeight}`}
           className="w-full h-auto overflow-visible block"
-          style={{ minWidth: '400px' }}
         >
-          <defs>
-            <linearGradient id={`area-grad-${accentColor.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={accentColor} stopOpacity="0.12" />
-              <stop offset="100%" stopColor={accentColor} stopOpacity="0.0" />
-            </linearGradient>
-          </defs>
-
           {/* Grid lines & axis labels */}
           {gridTicks.map((tick, idx) => (
             <g key={idx}>
@@ -100,15 +93,15 @@ export const RatingGraph: React.FC<RatingGraphProps> = ({
                 y1={tick.y}
                 x2={svgWidth - padRight}
                 y2={tick.y}
-                stroke="rgba(255, 255, 255, 0.05)"
+                stroke="rgba(23, 23, 23, 0.08)"
                 strokeDasharray="3 3"
                 strokeWidth="1"
               />
               <text
-                x={padLeft - 10}
+                x={padLeft - 8}
                 y={tick.y + 3.5}
                 textAnchor="end"
-                className="text-[10px] font-mono fill-[#D7E2EA]/35"
+                className="text-[10px] font-mono fill-[#8C959F]"
               >
                 {tick.value}
               </text>
@@ -121,30 +114,28 @@ export const RatingGraph: React.FC<RatingGraphProps> = ({
             y1={baselineY}
             x2={svgWidth - padRight}
             y2={baselineY}
-            stroke="rgba(255, 255, 255, 0.08)"
+            stroke="rgba(23, 23, 23, 0.12)"
             strokeWidth="1"
           />
 
-          {/* Area fill */}
-          <path d={areaPath} fill={`url(#area-grad-${accentColor.replace('#', '')})`} />
-
-          {/* Line path */}
+          {/* Solid line path (ZERO GRADIENTS) */}
           <path
             d={linePath}
             fill="none"
             stroke={accentColor}
-            strokeWidth="2"
+            strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
 
           {/* Data Points */}
           {coords.map((item, idx) => {
-            const isHovered = hoveredPoint?.id === item.point.id;
+            const isActive = activePoint?.id === item.point.id;
             return (
               <g
                 key={idx}
                 className="cursor-pointer"
+                data-testid={`graph-point-${idx}`}
                 onMouseEnter={() => {
                   setHoveredPoint(item.point);
                   setHoverPos({ x: item.x, y: item.y });
@@ -153,87 +144,98 @@ export const RatingGraph: React.FC<RatingGraphProps> = ({
                   setHoveredPoint(null);
                   setHoverPos(null);
                 }}
-                onClick={() => {
-                  setHoveredPoint(item.point);
-                  setHoverPos({ x: item.x, y: item.y });
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (pinnedPoint?.id === item.point.id) {
+                    setPinnedPoint(null);
+                    setPinnedPos(null);
+                  } else {
+                    setPinnedPoint(item.point);
+                    setPinnedPos({ x: item.x, y: item.y });
+                  }
                 }}
               >
-                {/* Generous hit area for easy hover on mobile and desktop */}
-                <circle cx={item.x} cy={item.y} r="14" fill="transparent" />
-
-                {/* Point circle */}
+                {/* Hit target */}
                 <circle
                   cx={item.x}
                   cy={item.y}
-                  r={isHovered ? '5' : '3'}
-                  fill="#0D0E12"
-                  stroke={accentColor}
-                  strokeWidth={isHovered ? '2.5' : '1.5'}
+                  r="18"
+                  fill="rgba(0,0,0,0.001)"
+                  style={{ pointerEvents: 'all' }}
+                />
+
+                {/* Visible Point */}
+                <circle
+                  cx={item.x}
+                  cy={item.y}
+                  r={isActive ? 6 : 3.5}
+                  fill={accentColor}
+                  stroke="#FFFFFF"
+                  strokeWidth="2"
                   className="transition-all duration-150"
                 />
               </g>
             );
           })}
         </svg>
-      </div>
 
-      {/* Floating Tooltip */}
-      {hoveredPoint && hoverPos && (
-        <div
-          className="absolute z-30 pointer-events-none transform -translate-x-1/2 -translate-y-full mb-3 px-3.5 py-2.5 rounded-xl border border-white/10 bg-[#12141A]/95 backdrop-blur-md shadow-2xl text-left transition-all duration-150"
-          style={{
-            left: `${(hoverPos.x / svgWidth) * 100}%`,
-            top: `${(hoverPos.y / svgHeight) * 100}%`,
-            minWidth: '180px',
-            maxWidth: '260px',
-          }}
-        >
-          <div className="flex items-start justify-between gap-2 border-b border-white/[0.08] pb-1.5 mb-1.5">
-            <span className="text-[11px] font-medium text-[#D7E2EA] line-clamp-2 leading-tight">
-              {hoveredPoint.title}
-            </span>
-          </div>
+        {/* Hover / Click Tooltip (Solid Surface, High Contrast, Clamped & Boundary-Aware) */}
+        {activePoint && activePos && (() => {
+          const topPercent = (activePos.y / svgHeight) * 100;
+          const leftPercent = (activePos.x / svgWidth) * 100;
+          
+          // If point is in the top 50% of the SVG, show tooltip BELOW the point; otherwise ABOVE
+          const isNearTop = topPercent < 50;
+          
+          // Horizontal alignment to prevent clipping on left or right edges
+          const isNearLeft = leftPercent < 22;
+          const isNearRight = leftPercent > 78;
 
-          <div className="space-y-1 text-xs font-mono">
-            <div className="flex items-center justify-between text-[#D7E2EA]/60">
-              <span>Rating:</span>
-              <div className="flex items-center gap-1.5">
-                {hoveredPoint.oldRating !== undefined && (
-                  <span className="text-[#D7E2EA]/40">{hoveredPoint.oldRating} →</span>
-                )}
-                <span className="font-bold text-[#D7E2EA]">{hoveredPoint.rating}</span>
-                {hoveredPoint.delta !== undefined && (
+          const xTransform = isNearLeft ? '0%' : isNearRight ? '-100%' : '-50%';
+          const yTransform = isNearTop ? '14px' : 'calc(-100% - 14px)';
+
+          return (
+            <div
+              className="absolute z-30 pointer-events-none rounded-xl bg-white border border-black/15 shadow-xl p-3 text-left transition-all duration-100 min-w-[210px] max-w-[260px]"
+              style={{
+                left: `${leftPercent}%`,
+                top: `${topPercent}%`,
+                transform: `translate(${xTransform}, ${yTransform})`,
+              }}
+            >
+              <p className="text-xs font-bold text-[#141413] line-clamp-1 mb-1">
+                {activePoint.title}
+              </p>
+              <div className="flex items-center justify-between text-[11px] font-mono text-[#57606A] mb-1.5">
+                <span>Rating: <strong className="text-[#141413] font-bold">{activePoint.rating}</strong></span>
+                {activePoint.delta !== undefined && (
                   <span
-                    className={
-                      hoveredPoint.delta >= 0
-                        ? 'text-emerald-400 font-semibold'
-                        : 'text-rose-400 font-semibold'
-                    }
+                    className={`font-bold font-mono px-1.5 py-0.5 rounded text-[10px] ${
+                      activePoint.delta >= 0 
+                        ? 'bg-[#3F6E50]/10 text-[#3F6E50]' 
+                        : 'bg-[#BD5338]/10 text-[#BD5338]'
+                    }`}
                   >
-                    ({hoveredPoint.delta >= 0 ? `+${hoveredPoint.delta}` : hoveredPoint.delta})
+                    {activePoint.delta >= 0
+                      ? `+${activePoint.delta}`
+                      : activePoint.delta}
                   </span>
                 )}
               </div>
+              <div className="flex items-center justify-between text-[10px] font-mono text-[#8C959F] border-t border-black/5 pt-1.5">
+                <span>Rank: #{activePoint.rank}</span>
+                <span>{activePoint.date}</span>
+              </div>
             </div>
+          );
+        })()}
+      </div>
 
-            {hoveredPoint.rank !== undefined && (
-              <div className="flex items-center justify-between text-[#D7E2EA]/60">
-                <span>Rank:</span>
-                <span className="font-semibold" style={{ color: accentColor }}>
-                  #{hoveredPoint.rank}
-                </span>
-              </div>
-            )}
-
-            {hoveredPoint.date && (
-              <div className="flex items-center justify-between text-[#D7E2EA]/40 text-[10px] pt-0.5">
-                <span>Date:</span>
-                <span>{hoveredPoint.date}</span>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {/* Axis Footer */}
+      <div className="flex items-center justify-between text-[10px] font-mono text-[#8C959F] px-4 pt-1">
+        <span>Earliest Recorded</span>
+        <span>Most Recent Contest</span>
+      </div>
     </div>
   );
 };

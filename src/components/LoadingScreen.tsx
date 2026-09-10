@@ -14,7 +14,7 @@ const LoadingScreen: React.FC = () => {
     const timer = setTimeout(() => {
       setIsVisible(false);
       sessionStorage.setItem('hasLoaded', 'true');
-    }, 2200);
+    }, 1800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -22,21 +22,21 @@ const LoadingScreen: React.FC = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-[9999] bg-[#0C0C0C] flex flex-col items-center justify-center gap-8"
-          exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          className="fixed inset-0 z-[9999] bg-[#F7F6F2] flex flex-col items-center justify-center gap-6 select-none"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
         >
           {/* Name reveal */}
           <div className="flex overflow-hidden">
             {name.split('').map((char, i) => (
               <motion.span
                 key={i}
-                className="hero-heading font-black text-3xl sm:text-5xl md:text-6xl tracking-[0.2em] uppercase"
-                initial={{ y: 60, opacity: 0 }}
+                className="text-[#171717] font-black text-2xl sm:text-4xl md:text-5xl tracking-[0.2em] uppercase font-mono"
+                initial={{ y: 40, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{
-                  delay: 0.15 + i * 0.06,
-                  duration: 0.6,
+                  delay: 0.1 + i * 0.04,
+                  duration: 0.4,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >
@@ -47,24 +47,21 @@ const LoadingScreen: React.FC = () => {
 
           {/* Subtitle */}
           <motion.p
-            className="text-[#D7E2EA]/40 font-light text-xs sm:text-sm uppercase tracking-[0.3em]"
+            className="text-[#57606A] font-mono text-xs uppercase tracking-[0.3em]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
+            transition={{ delay: 0.8, duration: 0.4 }}
           >
-            Software Engineer
+            System Architect & Software Engineer
           </motion.p>
 
-          {/* Progress bar */}
-          <motion.div className="w-48 sm:w-64 h-[2px] bg-[#D7E2EA]/10 rounded-full overflow-hidden mt-4">
+          {/* Solid progress bar */}
+          <motion.div className="w-44 sm:w-56 h-[2px] bg-[#EFECE6] rounded-full overflow-hidden mt-2">
             <motion.div
-              className="h-full rounded-full"
-              style={{
-                background: 'linear-gradient(90deg, #B600A8, #7621B0, #BE4C00)',
-              }}
+              className="h-full bg-[#171717] rounded-full"
               initial={{ width: '0%' }}
               animate={{ width: '100%' }}
-              transition={{ delay: 0.3, duration: 1.6, ease: 'easeInOut' }}
+              transition={{ delay: 0.2, duration: 1.4, ease: 'easeInOut' }}
             />
           </motion.div>
         </motion.div>

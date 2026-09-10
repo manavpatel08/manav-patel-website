@@ -14,14 +14,14 @@ interface CompactProfileTileProps {
   onClick: () => void;
 }
 
-// Clean Monochromatic / Solid Platform SVGs
+// Clean Platform Icons
 const PlatformIcon: React.FC<{ platformId: string; color: string }> = ({ platformId, color }) => {
   if (platformId === 'codeforces') {
     return (
       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
-        <rect x="3" y="12" width="4" height="9" rx="1" fill="#EAB308" />
+        <rect x="3" y="12" width="4" height="9" rx="1" fill="#B8732E" />
         <rect x="10" y="5" width="4" height="16" rx="1" fill={color} />
-        <rect x="17" y="9" width="4" height="12" rx="1" fill="#EF4444" />
+        <rect x="17" y="9" width="4" height="12" rx="1" fill="#C85A48" />
       </svg>
     );
   }
@@ -46,8 +46,6 @@ export const CompactProfileTile: React.FC<CompactProfileTileProps> = ({
   accentBg,
   onClick,
 }) => {
-  const isCF = platformId === 'codeforces';
-
   return (
     <motion.div
       layoutId={`profile-card-container-${platformId}`}
@@ -65,39 +63,32 @@ export const CompactProfileTile: React.FC<CompactProfileTileProps> = ({
       whileHover={{ y: -3 }}
       whileTap={{ scale: 0.985 }}
       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-      className="group relative w-full text-left rounded-2xl p-6 cursor-pointer select-none transition-colors duration-200 outline-none focus-visible:ring-1 focus-visible:ring-white/20"
-      style={{
-        background: isCF ? '#101217' : '#141210',
-        border: `1px solid ${isCF ? 'rgba(75, 136, 228, 0.18)' : 'rgba(229, 138, 43, 0.18)'}`,
-      }}
+      className="group relative w-full text-left rounded-2xl p-6 cursor-pointer select-none transition-all duration-200 outline-none bg-white border border-black/8 shadow-sm hover:border-black/16 hover:shadow-md"
     >
       {/* Top row: Platform Brand + Live Badge */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
           <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center border"
-            style={{
-              background: accentBg,
-              borderColor: `${accentColor}30`,
-            }}
+            className="w-9 h-9 rounded-xl flex items-center justify-center border border-black/5"
+            style={{ background: accentBg }}
           >
             <PlatformIcon platformId={platformId} color={accentColor} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-[#D7E2EA] tracking-wide uppercase leading-none">
+            <h3 className="text-sm font-bold text-[#171717] tracking-wider uppercase leading-none">
               {platformName}
             </h3>
-            <span className="text-xs font-mono text-[#D7E2EA]/50 block mt-1">
+            <span className="text-xs font-mono text-[#57606A] block mt-1">
               @{handle}
             </span>
           </div>
         </div>
 
         {/* Live Indicator Pill */}
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[11px] font-mono text-[#D7E2EA]/60">
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F7F6F2] border border-black/5 text-[11px] font-mono text-[#57606A]">
           <span
             className={`w-1.5 h-1.5 rounded-full ${
-              isLive ? 'bg-emerald-400' : 'bg-white/40'
+              isLive ? 'bg-[#4E8752]' : 'bg-[#8C959F]'
             }`}
           />
           <span>{isLive ? 'Live' : 'Synced'}</span>
@@ -105,9 +96,9 @@ export const CompactProfileTile: React.FC<CompactProfileTileProps> = ({
       </div>
 
       {/* Hero Metric: Rating + Rank */}
-      <div className="flex items-end justify-between py-2 border-t border-white/[0.06] mb-4">
+      <div className="flex items-end justify-between py-2 border-t border-black/5 mb-4">
         <div>
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#D7E2EA]/40 block mb-1">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#8C959F] block mb-1">
             Rating
           </span>
           <span
@@ -119,15 +110,14 @@ export const CompactProfileTile: React.FC<CompactProfileTileProps> = ({
         </div>
 
         <div className="text-right pb-0.5">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#D7E2EA]/40 block mb-1">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#8C959F] block mb-1">
             Rank
           </span>
           <span
-            className="inline-block px-2.5 py-0.5 rounded text-xs font-medium tracking-wide uppercase border"
+            className="inline-block px-2.5 py-0.5 rounded text-xs font-mono font-semibold tracking-wide uppercase border border-black/5"
             style={{
               background: accentBg,
               color: accentColor,
-              borderColor: `${accentColor}35`,
             }}
           >
             {rank || 'Unrated'}
@@ -136,8 +126,8 @@ export const CompactProfileTile: React.FC<CompactProfileTileProps> = ({
       </div>
 
       {/* Bottom CTA affordance */}
-      <div className="flex items-center justify-between pt-1 text-xs font-mono text-[#D7E2EA]/45 group-hover:text-[#D7E2EA]/75 transition-colors">
-        <span>Click to view profile & history</span>
+      <div className="flex items-center justify-between pt-1 text-xs font-mono text-[#57606A] group-hover:text-[#171717] transition-colors">
+        <span>View detailed history & graph</span>
         <div className="flex items-center gap-1 transition-transform group-hover:translate-x-0.5">
           <ArrowUpRight className="w-3.5 h-3.5" style={{ color: accentColor }} />
         </div>

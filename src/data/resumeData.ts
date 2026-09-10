@@ -20,54 +20,73 @@ export const profile = {
 };
 
 export const aboutSummary =
-  "I'm a Computer Science student at Pandit Deendayal Energy University focused on building scalable backend systems and distributed applications. I enjoy designing systems from the ground up and understanding the engineering tradeoffs behind architecture, including data modeling, API design, concurrency, caching, fault tolerance, scalability, and performance.\n\nI've built CodeSync, a real time collaborative code editor designed around distributed state synchronization, CRDTs, WebSockets, persistent storage, and sandboxed code execution. I'm currently interning at AdaniConneX, working on infrastructure automation and systems for monitoring and managing enterprise data center infrastructure.\n\nI'm particularly interested in backend engineering, distributed systems, system design, and high performance C++. Outside of development, I spend my time solving Codeforces problems and studying how large scale systems are designed and built.";
+  "I'm a Computer Science student at PDEU building full-stack systems that solve real problems, not just tick boxes. I care about the why behind architecture decisions — schema design, API contracts, caching, and scalability — as much as the code itself.\n\nI've built CodeSync, a real-time collaborative code editor with sub-100ms sync latency, and JobKart.ai, an AI-powered job-matching platform that cuts search time by 60–70%. Currently interning at AdaniConneX, working on infrastructure automation for enterprise data centers.\n\nWhen I'm not coding, I'm probably solving a Codeforces problem or reading up on system design.";
 
-export const aboutHighlights = [
-  {
-    icon: '🚀',
-    title: 'Full Stack',
-    description: 'React, Node, Next.js — end-to-end product development',
-    color: '#61DAFB',
-  },
-  {
-    icon: '🧠',
-    title: 'AI / ML',
-    description: 'Transformers, FAISS, NLP — intelligent system design',
-    color: '#FF6F61',
-  },
-  {
-    icon: '☁️',
-    title: 'Cloud Infra',
-    description: 'Ansible, OpenStack, AWS — infrastructure as code',
-    color: '#FF9900',
-  },
-  {
-    icon: '🏆',
-    title: 'Competitive',
-    description: 'Codeforces, LeetCode — algorithmic problem solving',
-    color: '#28c840',
-  },
-];
+export const aboutNarrative = {
+  intro: "Computer Science student at PDEU building robust full-stack systems that solve concrete engineering problems with speed and precision.",
+  focus: "Deeply invested in the mechanics of architecture: database schema modeling, resilient API contracts, low-latency caching, and distributed scale.",
+  work: [
+    {
+      name: "CodeSync",
+      detail: "Real-time collaborative code editor with sub-100ms sync latency via CRDTs & WebSockets.",
+    },
+    {
+      name: "JobKart.ai",
+      detail: "AI job-matching engine cutting manual candidate search time by 60–70% via semantic retrieval.",
+    },
+    {
+      name: "AdaniConneX",
+      detail: "Cloud intern automating enterprise data center infrastructure with Ansible & OpenStack.",
+    },
+  ],
+  personal: "When offline: tackling competitive programming on Codeforces or dissecting high-throughput system architectures.",
+};
 
 export const education = {
   institution: 'Pandit Deendayal Energy University',
-  degree: 'B.Tech Computer Science and Engineering',
-  cpi: '9.37/10',
-  duration: 'June 2023 – May 2027',
+  degree: 'B.Tech Computer Science',
+  cpi: '9.37 CPI',
+  duration: '2023 – 2027',
   location: 'Gandhinagar, Gujarat',
-  courses: [
-    'DBMS',
-    'Operating System',
-    'Computer Network',
-    'Data Structures and Algorithms',
-    'Theory of Computation',
-    'Compiler Design',
-    'Artificial Intelligence',
-    'Information Security',
-    'Cybersecurity',
-    'Web Technologies',
-  ],
 };
+
+export const servicesData = [
+  {
+    number: '01',
+    title: 'Backend Systems',
+    description: 'Scalable APIs, service architecture, database design, caching, and reliable high-throughput backend infrastructure.',
+    scope: ['API Contracts & Schema Design', 'Distributed Caching (Redis)', 'PostgreSQL Indexing & Optimization', 'Concurrency & Fault Tolerance'],
+    accent: '#3A6D8C', // technical / blue
+  },
+  {
+    number: '02',
+    title: 'Full-Stack Applications',
+    description: 'Production-ready web applications built with rigorous type safety, clean frontend architecture, and resilient state synchronization.',
+    scope: ['React & Next.js Architecture', 'Type-Safe Client-Server Contracts', 'REST & GraphQL APIs', 'Performance Auditing'],
+    accent: '#BD5338', // terracotta / work
+  },
+  {
+    number: '03',
+    title: 'Real-Time Systems',
+    description: 'WebSockets, collaborative document synchronization, conflict-free replicated data types (CRDTs), and low-latency event channels.',
+    scope: ['Yjs & Conflict-Free Resolution', 'State Synchronization <100ms', 'WebSocket Broker Pipelines', 'Real-Time Telemetry'],
+    accent: '#3F6E50', // green / reliability
+  },
+  {
+    number: '04',
+    title: 'AI / Intelligent Applications',
+    description: 'Practical LLM-powered applications, semantic vector retrieval pipelines (FAISS/RAG), and intelligent search systems.',
+    scope: ['Transformer Embeddings & Vector Search', 'Semantic Q&A & Document Ingestion', 'Prompt Architecture & Evaluation', 'FastAPI Microservices'],
+    accent: '#C48229', // mustard / highlights
+  },
+  {
+    number: '05',
+    title: 'Infrastructure Automation',
+    description: 'Infrastructure as Code, configuration orchestration, and server provisioning pipelines for enterprise environments.',
+    scope: ['Ansible Playbooks & Roles', 'OpenStack Cloud Environments', 'Linux Server Provisioning', 'Zero-Downtime Deployments'],
+    accent: '#6B587B', // lavender / tooling
+  },
+];
 
 export const experienceData = [
   {
@@ -237,4 +256,79 @@ export const techMarqueeRow2 = [
   { name: 'Prisma', tagline: 'ORM' },
 ];
 
-export const navLinks = ['About', 'Experience', 'Skills', 'Projects', 'Contact'];
+export const scopeData = {
+  headline: 'Architectural Scope & Engagement Boundaries',
+  summary:
+    'Clear contracts, production-ready deliverables, and disciplined engineering hygiene. Designed for organizations needing dependable distributed backends, low-latency microservices, or intelligent AI pipelines.',
+  models: [
+    {
+      number: '01',
+      title: 'Full-Time Engineering Roles',
+      tagline: 'High-Impact Ownership',
+      description:
+        'Software Engineer / Backend / Distributed Systems roles with end-to-end ownership from architecture design to production telemetry.',
+      deliverables: [
+        'Production backend microservices & distributed caches',
+        'Database indexing, schema migrations, and performance audits',
+        'Clean API contracts (REST, GraphQL, WebSockets)',
+        'Infrastructure automation & deployment playbooks',
+      ],
+      badge: 'Full-Time',
+      accent: '#BD5338',
+    },
+    {
+      number: '02',
+      title: 'Contract Systems Buildout',
+      tagline: 'Focused Execution',
+      description:
+        'Direct project-based execution for zero-to-one infrastructure, real-time collaboration engines, or custom RAG/search pipelines.',
+      deliverables: [
+        'Real-time synchronization engines (CRDTs, WebSockets)',
+        'LLM & vector retrieval pipelines (FAISS, LangChain, FastAPI)',
+        'Custom multi-platform search engines & fuzzy rankers',
+        'Cloud provisioning pipelines (Linux, OpenStack, Ansible)',
+      ],
+      badge: 'Milestone Contract',
+      accent: '#3A6D8C',
+    },
+    {
+      number: '03',
+      title: 'Architecture Advisory & Review',
+      tagline: 'Technical Hygiene',
+      description:
+        'System design audits, query optimization, high-throughput scaling strategies, and architectural risk assessments.',
+      deliverables: [
+        'Bottleneck discovery & latency reduction audits',
+        'Relational & NoSQL schema design reviews',
+        'Fault tolerance & graceful degradation strategies',
+        'Concurrency & event-driven architecture design',
+      ],
+      badge: 'Advisory',
+      accent: '#3F6E50',
+    },
+  ],
+  standards: [
+    {
+      label: 'Sync & Latency SLA',
+      value: '< 100ms',
+      detail: 'State replication and cached endpoints engineered for low-latency feedback.',
+    },
+    {
+      label: 'Type Safety & Contracts',
+      value: '100% Strict',
+      detail: 'End-to-end type validation across client, server, and database layers.',
+    },
+    {
+      label: 'Deployment Hygiene',
+      value: 'Zero-Downtime',
+      detail: 'Automated CI/CD, declarative playbooks, and rolling migration support.',
+    },
+    {
+      label: 'System Resilience',
+      value: '99.9% Fault Tolerance',
+      detail: 'Idempotency, distributed circuit breakers, and graceful fallback paths.',
+    },
+  ],
+};
+
+export const navLinks = ['About', 'Experience', 'Projects', 'Skills', 'Services', 'Scope', 'Contact'];

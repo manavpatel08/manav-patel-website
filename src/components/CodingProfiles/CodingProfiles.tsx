@@ -36,8 +36,8 @@ export const CodingProfiles: React.FC = () => {
           rating={cfData?.rating || (cfLoading ? 0 : 1629)}
           rank={cfData?.rank || (cfLoading ? 'Loading…' : 'Expert')}
           isLive={!cfError && !!cfData}
-          accentColor="#4B88E4"
-          accentBg="rgba(75, 136, 228, 0.12)"
+          accentColor="#3B76A6"
+          accentBg="#EBF2F9"
           onClick={() => setActiveModal('codeforces')}
         />
 
@@ -48,8 +48,8 @@ export const CodingProfiles: React.FC = () => {
           rating={lcData?.rating || (lcLoading ? 0 : 1924)}
           rank={lcData?.badge || (lcLoading ? 'Loading…' : 'Knight')}
           isLive={!lcError && !!lcData}
-          accentColor="#E58A2B"
-          accentBg="rgba(229, 138, 43, 0.12)"
+          accentColor="#B8732E"
+          accentBg="#FDF6EC"
           onClick={() => setActiveModal('leetcode')}
         />
       </div>

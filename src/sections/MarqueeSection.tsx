@@ -14,7 +14,7 @@ const MarqueeSection: React.FC = () => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
       const sectionTop = sectionRef.current.offsetTop;
-      const raw = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+      const raw = (window.scrollY - sectionTop + window.innerHeight) * 0.25;
       setOffset(raw);
     };
 
@@ -26,35 +26,37 @@ const MarqueeSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden"
+      className="bg-[#F7F6F2] py-16 sm:py-20 overflow-hidden border-t border-black/8 select-none"
     >
-      {/* Row 1 - moves RIGHT */}
-      <div className="flex gap-3 mb-3" style={{ willChange: 'transform' }}>
-        <div
-          className="flex gap-3"
-          style={{
-            transform: `translateX(${offset - 200}px)`,
-            willChange: 'transform',
-          }}
-        >
-          {row1Tripled.map((tech, i) => (
-            <TechCard key={`r1-${i}`} name={tech.name} tagline={tech.tagline} />
-          ))}
+      <div className="flex flex-col gap-3">
+        {/* Row 1 - moves RIGHT */}
+        <div className="flex gap-3" style={{ willChange: 'transform' }}>
+          <div
+            className="flex gap-3"
+            style={{
+              transform: `translateX(${offset - 150}px)`,
+              willChange: 'transform',
+            }}
+          >
+            {row1Tripled.map((tech, i) => (
+              <TechCard key={`r1-${i}`} name={tech.name} tagline={tech.tagline} />
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Row 2 - moves LEFT */}
-      <div className="flex gap-3" style={{ willChange: 'transform' }}>
-        <div
-          className="flex gap-3"
-          style={{
-            transform: `translateX(${-(offset - 200)}px)`,
-            willChange: 'transform',
-          }}
-        >
-          {row2Tripled.map((tech, i) => (
-            <TechCard key={`r2-${i}`} name={tech.name} tagline={tech.tagline} />
-          ))}
+        {/* Row 2 - moves LEFT */}
+        <div className="flex gap-3" style={{ willChange: 'transform' }}>
+          <div
+            className="flex gap-3"
+            style={{
+              transform: `translateX(${-(offset - 150)}px)`,
+              willChange: 'transform',
+            }}
+          >
+            {row2Tripled.map((tech, i) => (
+              <TechCard key={`r2-${i}`} name={tech.name} tagline={tech.tagline} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

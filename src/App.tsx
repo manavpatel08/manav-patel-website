@@ -6,20 +6,29 @@ import { AnimatePresence } from 'framer-motion';
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
+  React.useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   React.useLayoutEffect(() => {
-    // Force immediate scroll restoration
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     
-    // Explicitly reset Lenis instance
     if (window.__lenis) {
       window.__lenis.scrollTo(0, { immediate: true });
     }
 
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-    });
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { immediate: true });
+      }
+    }, 10);
+
+    return () => clearTimeout(timer);
   }, [pathname]);
   return null;
 };

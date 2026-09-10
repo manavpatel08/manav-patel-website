@@ -1,47 +1,101 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import ScrollProgress from '../components/ScrollProgress';
+import ScrollWayfinding from '../components/ScrollWayfinding';
 import LoadingScreen from '../components/LoadingScreen';
 import CommandPalette from '../components/CommandPalette';
 import HeroSection from '../sections/HeroSection';
 import MarqueeSection from '../sections/MarqueeSection';
 import AboutSection from '../sections/AboutSection';
-import StatsSection from '../sections/StatsSection';
-import SkillsSection from '../sections/SkillsSection';
 import ExperienceSection from '../sections/ExperienceSection';
 import ProjectsSection from '../sections/ProjectsSection';
-import PhilosophySection from '../sections/PhilosophySection';
 import CompetitiveProgrammingSection from '../sections/CompetitiveProgrammingSection';
-import CTASection from '../sections/CTASection';
+import SkillsSection from '../sections/SkillsSection';
+import ServicesSection from '../sections/ServicesSection';
+import ScopeSection from '../sections/ScopeSection';
 import ContactSection from '../sections/ContactSection';
 import Footer from '../sections/Footer';
+import SectionTransition from '../components/SectionTransition';
 
 const Home: React.FC = () => {
   return (
     <>
       <LoadingScreen />
       <ScrollProgress />
+      <ScrollWayfinding />
       <Navbar />
       <CommandPalette />
 
-      {/* Aurora Background Blobs */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden mix-blend-screen">
-        <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#B600A8]/[0.03] blur-[120px] mix-blend-screen blob" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] rounded-full bg-[#7621B0]/[0.03] blur-[120px] mix-blend-screen blob" style={{ animationDelay: '5s' }} />
-      </div>
-
-      <div className="bg-transparent font-kanit relative z-10" style={{ overflowX: 'clip' }}>
+      <div className="bg-[#F4F0E8] font-sans text-[#141413] relative z-10" style={{ overflowX: 'clip' }}>
+        {/* Hero & Identity */}
         <HeroSection />
         <MarqueeSection />
+
+        {/* 01 — ABOUT */}
         <AboutSection />
+
+        <SectionTransition
+          from="01 / ABOUT"
+          to="02 / EXPERIENCE"
+          label="SYSTEM ARCHITECTURE → DATA CENTER IaC"
+          type="diagram"
+        />
+
+        {/* 02 — EXPERIENCE */}
         <ExperienceSection />
-        <StatsSection />
-        <SkillsSection />
+
+        <SectionTransition
+          from="02 / EXPERIENCE"
+          to="03 / PROJECTS"
+          label="ENTERPRISE CLOUD → PRODUCTION SYSTEMS"
+          type="timeline"
+        />
+
+        {/* 03 — PROJECTS & ALGORITHMIC DEPTH */}
         <ProjectsSection />
-        <PhilosophySection />
         <CompetitiveProgrammingSection />
-        <CTASection />
+
+        <SectionTransition
+          from="03 / PROJECTS"
+          to="04 / SKILLS"
+          label="SYSTEM IMPLEMENTATIONS → CORE CAPABILITIES"
+          type="technology"
+        />
+
+        {/* 04 — SKILLS */}
+        <SkillsSection />
+
+        <SectionTransition
+          from="04 / SKILLS"
+          to="05 / SERVICES"
+          label="TECHNICAL PROFICIENCIES → DELIVERED SERVICES"
+          type="capability"
+        />
+
+        {/* 05 — SERVICES */}
+        <ServicesSection />
+
+        <SectionTransition
+          from="05 / SERVICES"
+          to="06 / SCOPE"
+          label="DELIVERED SOLUTIONS → ENGAGEMENT & SLAs"
+          type="engagement"
+        />
+
+        {/* 06 — SCOPE */}
+        <ScopeSection />
+
+        <SectionTransition
+          from="06 / SCOPE"
+          to="07 / CONTACT"
+          label="SPECIFICATIONS → DIRECT HANDSHAKE"
+          type="handshake"
+        />
+
+        {/* 07 — CONTACT */}
         <ContactSection />
+
+        {/* Closing Footer */}
         <Footer />
       </div>
     </>

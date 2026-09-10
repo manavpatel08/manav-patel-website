@@ -42,7 +42,7 @@ const CommandPalette: React.FC = () => {
         <>
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-[999] bg-black/40 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -51,24 +51,24 @@ const CommandPalette: React.FC = () => {
 
           {/* Modal */}
           <motion.div
-            className="fixed top-[20%] left-1/2 z-[1000] w-[90%] max-w-md glass-card rounded-2xl overflow-hidden"
+            className="fixed top-[20%] left-1/2 z-[1000] w-[90%] max-w-md bg-white border border-black/10 rounded-2xl shadow-xl overflow-hidden text-[#171717]"
             initial={{ opacity: 0, y: -20, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: -20, x: '-50%' }}
             transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* Search input */}
-            <div className="flex items-center gap-3 px-5 py-4 border-b border-white/5">
-              <Search className="w-4 h-4 text-[#D7E2EA]/40" />
+            <div className="flex items-center gap-3 px-5 py-3.5 border-b border-black/5">
+              <Search className="w-4 h-4 text-[#8C959F]" />
               <input
                 type="text"
-                placeholder="Navigate to section..."
+                placeholder="Jump to section..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 autoFocus
-                className="w-full bg-transparent text-[#D7E2EA] font-light text-sm tracking-wide placeholder:text-[#D7E2EA]/30 outline-none"
+                className="w-full bg-transparent text-[#171717] font-medium text-sm tracking-wide placeholder:text-[#8C959F] outline-none"
               />
-              <kbd className="text-[10px] text-[#D7E2EA]/30 font-light bg-white/5 rounded px-1.5 py-0.5">
+              <kbd className="text-[10px] text-[#57606A] font-mono bg-[#EFECE6] border border-black/5 rounded px-1.5 py-0.5">
                 ESC
               </kbd>
             </div>
@@ -79,14 +79,15 @@ const CommandPalette: React.FC = () => {
                 <button
                   key={link}
                   onClick={() => handleNavigate(link.toLowerCase())}
-                  className="w-full text-left px-5 py-3 text-[#D7E2EA]/70 font-medium text-sm uppercase tracking-wider hover:bg-white/5 hover:text-[#D7E2EA] transition-colors duration-150 cursor-pointer"
+                  className="w-full text-left px-5 py-2.5 text-[#57606A] font-mono text-xs uppercase tracking-wider hover:bg-[#F7F6F2] hover:text-[#171717] transition-colors duration-150 cursor-pointer flex items-center justify-between"
                 >
-                  {link}
+                  <span>{link}</span>
+                  <span className="text-[10px] text-[#8C959F]">#{link.toLowerCase()}</span>
                 </button>
               ))}
               {filtered.length === 0 && (
-                <p className="px-5 py-3 text-[#D7E2EA]/30 font-light text-sm">
-                  No sections found
+                <p className="px-5 py-3 text-[#8C959F] font-mono text-xs text-center">
+                  No matching section found
                 </p>
               )}
             </div>
