@@ -75,3 +75,6 @@ const mockCanvasContext = new Proxy(baseCanvasContext, {
 });
 
 HTMLCanvasElement.prototype.getContext = (() => mockCanvasContext) as any;
+
+// done
+
