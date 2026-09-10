@@ -93,3 +93,5 @@ const PhilosophySection: React.FC = () => {
 };
 
 export default PhilosophySection;
+
+// done
