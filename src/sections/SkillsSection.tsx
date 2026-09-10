@@ -10,8 +10,7 @@ import {
   Server, 
   Database, 
   BrainCircuit, 
-  Cloud, 
-  Wrench 
+  Cloud 
 } from 'lucide-react';
 
 const categories = [
@@ -21,7 +20,6 @@ const categories = [
   { title: 'Databases', items: skills.databases, Icon: Database },
   { title: 'AI / ML', items: skills.aiml, Icon: BrainCircuit },
   { title: 'Cloud & DevOps', items: skills.cloud, Icon: Cloud },
-  { title: 'Developer Tools', items: skills.tools, Icon: Wrench },
 ];
 
 const SkillsSection: React.FC = () => {
@@ -30,7 +28,7 @@ const SkillsSection: React.FC = () => {
   return (
     <section
       id="skills"
-      className="bg-[#F7F6F2] px-6 md:px-12 py-24 sm:py-28 md:py-36 relative border-t border-black/8 select-none"
+      className="bg-[#ECE6DC] px-6 md:px-12 py-24 sm:py-28 md:py-36 relative border-t border-black/8 select-none"
     >
       <div className="max-w-6xl mx-auto">
         
@@ -51,8 +49,8 @@ const SkillsSection: React.FC = () => {
               onClick={() => setViewMode('physics')}
               className={`px-4 py-1.5 rounded-md text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                 viewMode === 'physics' 
-                  ? 'bg-[#171717] text-[#F7F6F2] font-semibold' 
-                  : 'text-[#57606A] hover:text-[#171717]'
+                  ? 'bg-[#141413] text-[#F4F0E8] font-semibold' 
+                  : 'text-[#524F4A] hover:text-[#141413]'
               }`}
             >
               Interactive Simulation
@@ -61,8 +59,8 @@ const SkillsSection: React.FC = () => {
               onClick={() => setViewMode('grid')}
               className={`px-4 py-1.5 rounded-md text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                 viewMode === 'grid' 
-                  ? 'bg-[#171717] text-[#F7F6F2] font-semibold' 
-                  : 'text-[#57606A] hover:text-[#171717]'
+                  ? 'bg-[#141413] text-[#F4F0E8] font-semibold' 
+                  : 'text-[#524F4A] hover:text-[#141413]'
               }`}
             >
               Categorized Matrix
@@ -93,21 +91,21 @@ const SkillsSection: React.FC = () => {
             >
               {categories.map((cat, catIndex) => (
                 <FadeIn key={cat.title} delay={catIndex * 0.05} y={15}>
-                  <div className="h-full p-6 rounded-2xl bg-white border border-black/8 shadow-sm hover:border-black/16 hover:shadow-md transition-all duration-200">
+                  <div className="h-full p-6 sm:p-7 rounded-2xl bg-white border border-black/8 shadow-sm hover:border-black/16 hover:shadow-md transition-all duration-200">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 rounded-lg bg-[#EFECE6] text-[#171717]">
-                        <cat.Icon className="w-4 h-4" />
+                      <div className="p-2 rounded-lg bg-[#ECE6DC] text-[#141413]">
+                        <cat.Icon className="w-4 h-4 text-[#3A6D8C]" />
                       </div>
-                      <h3 className="text-[#171717] font-bold text-sm tracking-tight uppercase">
+                      <h3 className="text-[#141413] font-bold text-sm tracking-tight uppercase">
                         {cat.title}
                       </h3>
                     </div>
                     
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {cat.items.map((skill) => (
                         <span 
                           key={skill}
-                          className="px-2.5 py-1 rounded bg-[#EFECE6] text-[#24292F] font-mono text-xs border border-black/5"
+                          className="px-2.5 py-1 rounded bg-[#ECE6DC] text-[#141413] font-mono text-xs border border-black/5 font-medium"
                         >
                           {skill}
                         </span>

@@ -5,7 +5,10 @@ import CodingProfiles from '../components/CodingProfiles/CodingProfiles';
 
 const CompetitiveProgrammingSection: React.FC = () => {
   return (
-    <section className="bg-[#F7F6F2] px-6 md:px-12 py-24 sm:py-28 md:py-36 relative border-t border-black/8 select-none">
+    <section 
+      id="competitive"
+      className="bg-[#F4F0E8] px-6 md:px-12 py-24 sm:py-28 md:py-36 relative border-t border-black/8 select-none"
+    >
       <div className="max-w-4xl mx-auto relative z-10">
         
         {/* Section Header */}

@@ -16,29 +16,25 @@ const HeroSection: React.FC = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [cursorCoords, setCursorCoords] = useState({ x: 0, y: 0 });
 
-  // Mouse motion values with smooth spring physics
+  // Mouse motion values with subtle, gentle spring physics for grid displacement
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothX = useSpring(mouseX, { stiffness: 45, damping: 25 });
   const smoothY = useSpring(mouseY, { stiffness: 45, damping: 25 });
-  const radialX = useSpring(mouseX, { stiffness: 120, damping: 30 });
-  const radialY = useSpring(mouseY, { stiffness: 120, damping: 30 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
       setCursorCoords({ x: Math.round(e.clientX), y: Math.round(e.clientY) });
-      const x = (e.clientX / innerWidth - 0.5) * 18;
-      const y = (e.clientY / innerHeight - 0.5) * 18;
+      const x = (e.clientX / innerWidth - 0.5) * 14;
+      const y = (e.clientY / innerHeight - 0.5) * 14;
       mouseX.set(x);
       mouseY.set(y);
-      radialX.set(e.clientX);
-      radialY.set(e.clientY);
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY, radialX, radialY]);
+  }, [mouseX, mouseY]);
 
   // Smooth role rotation (fade + subtle vertical translate)
   useEffect(() => {
@@ -54,28 +50,21 @@ const HeroSection: React.FC = () => {
     >
       {/* Subtle architectural hairline grid reacting gently to mouse parallax */}
       <motion.div
-        className="absolute inset-0 grid-bg pointer-events-none opacity-45"
+        className="absolute inset-0 grid-bg pointer-events-none opacity-40"
         style={{ x: smoothX, y: smoothY }}
       />
 
-      {/* Subtle cursor-following radial highlight (No neon, just soft warm depth) */}
-      <motion.div
-        className="pointer-events-none fixed top-0 left-0 w-[420px] h-[420px] rounded-full -translate-x-1/2 -translate-y-1/2 hidden md:block"
-        style={{
-          x: radialX,
-          y: radialY,
-          background: 'radial-gradient(circle, rgba(228, 221, 210, 0.45) 0%, transparent 70%)',
-          zIndex: 1,
-        }}
-      />
-
-      {/* Technical Telemetry Bar */}
+      {/* Technical Telemetry & Availability Bar */}
       <div className="pt-24 sm:pt-28 px-6 md:px-12 max-w-7xl mx-auto w-full flex items-center justify-between text-[11px] font-mono text-[#524F4A] relative z-10">
-        <div className="flex items-center gap-2.5">
-          <span className="inline-block w-2 h-2 rounded-full bg-[#3F6E50]" />
-          <span className="tracking-widest uppercase text-[#524F4A]">OPEN FOR WORK</span>
-          <span className="hidden sm:inline text-[#827E77]"></span>
-          <span className="hidden sm:inline text-[#827E77]"></span>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="inline-block w-2 h-2 rounded-full bg-[#3F6E50] animate-pulse" />
+          <span className="font-semibold tracking-wider uppercase text-[#141413]">OPEN FOR</span>
+          <span className="text-[#827E77]">•</span>
+          <span className="tracking-wide text-[#524F4A]">Software Engineering</span>
+          <span className="hidden sm:inline text-[#827E77]">•</span>
+          <span className="hidden sm:inline tracking-wide text-[#524F4A]">Backend Development</span>
+          <span className="hidden md:inline text-[#827E77]">•</span>
+          <span className="hidden md:inline tracking-wide text-[#524F4A]">Systems Architecture</span>
         </div>
 
         <div className="hidden md:flex items-center gap-4 text-[#827E77]">

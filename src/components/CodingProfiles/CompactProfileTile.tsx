@@ -48,7 +48,6 @@ export const CompactProfileTile: React.FC<CompactProfileTileProps> = ({
 }) => {
   return (
     <motion.div
-      layoutId={`profile-card-container-${platformId}`}
       onClick={onClick}
       role="button"
       tabIndex={0}

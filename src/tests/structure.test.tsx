@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Home from '../pages/Home';
 
 describe('7-Section Full Page Structure & DOM Sequencing', () => {
-  it('renders all 7 sections in the exact required sequence', () => {
+  it('renders all 7 sections in the exact required sequence: About -> Experience -> Projects -> Skills -> CF/LeetCode -> Services -> Contact', () => {
     const { container } = render(
       <BrowserRouter>
         <Home />
@@ -16,8 +16,8 @@ describe('7-Section Full Page Structure & DOM Sequencing', () => {
       'experience',
       'projects',
       'skills',
+      'competitive',
       'services',
-      'scope',
       'contact',
     ];
 
@@ -37,7 +37,7 @@ describe('7-Section Full Page Structure & DOM Sequencing', () => {
     }
   });
 
-  it('renders all SectionTransition visual connectors between sections', () => {
+  it('renders SectionTransition visual connectors between sections', () => {
     const { container } = render(
       <BrowserRouter>
         <Home />

@@ -4,25 +4,24 @@ import Navbar from '../components/Navbar';
 import { navLinks, profile } from '../data/resumeData';
 
 describe('Navigation System & Header', () => {
-  it('navLinks data strictly follows the 7-section structure', () => {
+  it('navLinks data strictly follows the 6-section structure', () => {
     expect(navLinks).toEqual([
       'About',
       'Experience',
       'Projects',
       'Skills',
       'Services',
-      'Scope',
       'Contact',
     ]);
   });
 
-  it('renders all 7 navigation links in the desktop header in strict order', () => {
+  it('renders all 6 navigation links in the desktop header in strict order', () => {
     render(<Navbar />);
     
     // Check brand logo
     expect(screen.getByText('MANAV PATEL')).toBeInTheDocument();
 
-    // Verify all 7 links exist
+    // Verify all 6 links exist
     navLinks.forEach((link) => {
       const desktopLinks = screen.getAllByRole('link', { name: new RegExp(link, 'i') });
       expect(desktopLinks.length).toBeGreaterThan(0);
@@ -44,7 +43,7 @@ describe('Navigation System & Header', () => {
     expect(profile.resumeUrl).toMatch(/^https:\/\/drive\.google\.com/);
   });
 
-  it('opens mobile menu and displays all 7 links plus Resume button', () => {
+  it('opens mobile menu and displays all 6 links plus Resume button', () => {
     render(<Navbar />);
 
     const toggleButton = screen.getByRole('button', { name: /toggle navigation menu/i });
@@ -53,7 +52,7 @@ describe('Navigation System & Header', () => {
     // Open mobile menu
     fireEvent.click(toggleButton);
 
-    // Verify all 7 links are displayed in the mobile overlay
+    // Verify all 6 links are displayed in the mobile overlay
     navLinks.forEach((link) => {
       const matchingLinks = screen.getAllByRole('link', { name: new RegExp(link, 'i') });
       // Should exist for desktop and mobile

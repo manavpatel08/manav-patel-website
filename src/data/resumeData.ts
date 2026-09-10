@@ -6,7 +6,7 @@ export const profile = {
   name: 'Manav Patel',
   heroName: 'Manav Patel',
   title: 'Software Engineer',
-  subtitle: 'Software Engineer • Full Stack • AI/ML • Cloud',
+  subtitle: 'Software Engineering • Backend Development • Systems Architecture',
   tagline:
     'Building scalable software, intelligent systems, and cloud infrastructure',
   email: 'patelmanav0805@gmail.com',
@@ -16,104 +16,67 @@ export const profile = {
   github: 'https://github.com/manavpatel08',
   codeforces: 'https://codeforces.com/profile/manavp8',
   leetcode: 'https://leetcode.com/u/__Manav_Patel/',
-  resumeUrl: 'https://drive.google.com/file/d/1s7tRxqUtPeay87XLXuVE5huHPFnCGEWH/view?usp=drive_link',
+  resumeUrl: 'https://drive.google.com/file/d/1uKaPGXwmxHfykgmwoiylXJNkW31Hi1wU/view?usp=drive_link',
 };
 
 export const aboutSummary =
-  "I'm a Computer Science student at PDEU building full-stack systems that solve real problems, not just tick boxes. I care about the why behind architecture decisions — schema design, API contracts, caching, and scalability — as much as the code itself.\n\nI've built CodeSync, a real-time collaborative code editor with sub-100ms sync latency, and JobKart.ai, an AI-powered job-matching platform that cuts search time by 60–70%. Currently interning at AdaniConneX, working on infrastructure automation for enterprise data centers.\n\nWhen I'm not coding, I'm probably solving a Codeforces problem or reading up on system design.";
+  'Computer Science student at PDEU building full-stack systems that solve real problems, not just tick boxes. I focus on the engineering behind reliable systems — API design, database architecture, caching, distributed systems, and scalability.';
 
 export const aboutNarrative = {
-  intro: "Computer Science student at PDEU building robust full-stack systems that solve concrete engineering problems with speed and precision.",
-  focus: "Deeply invested in the mechanics of architecture: database schema modeling, resilient API contracts, low-latency caching, and distributed scale.",
-  work: [
-    {
-      name: "CodeSync",
-      detail: "Real-time collaborative code editor with sub-100ms sync latency via CRDTs & WebSockets.",
-    },
-    {
-      name: "JobKart.ai",
-      detail: "AI job-matching engine cutting manual candidate search time by 60–70% via semantic retrieval.",
-    },
-    {
-      name: "AdaniConneX",
-      detail: "Cloud intern automating enterprise data center infrastructure with Ansible & OpenStack.",
-    },
-  ],
-  personal: "When offline: tackling competitive programming on Codeforces or dissecting high-throughput system architectures.",
+  focus: {
+    title: 'Engineering Focus',
+    body: 'Computer Science student at PDEU building full-stack systems that solve real problems, not just tick boxes.\n\nI focus on the engineering behind reliable systems — API design, database architecture, caching, distributed systems, and scalability.',
+  },
+  context: {
+    title: 'Systems & Context',
+    body: 'Creator of CodeSync, a real-time collaborative code editor with sub-100ms synchronization, and JobKart.ai, an AI-powered job matching platform that reduces manual search effort by 60–70%.\n\nPreviously a Software Engineering Intern at AdaniConneX, where I worked on infrastructure automation and monitoring for enterprise data centers.',
+  },
+  offline: {
+    title: 'Offline',
+    body: 'Solving Codeforces problems and studying large-scale system design.',
+  },
 };
 
 export const education = {
   institution: 'Pandit Deendayal Energy University',
-  degree: 'B.Tech Computer Science',
-  cpi: '9.37 CPI',
-  duration: '2023 – 2027',
+  degree: 'B.Tech in Computer Science and Engineering',
+  cpi: 'CPI: 9.37 / 10',
+  duration: 'June 2023 – May 2027',
   location: 'Gandhinagar, Gujarat',
 };
-
-export const servicesData = [
-  {
-    number: '01',
-    title: 'Backend Systems',
-    description: 'Scalable APIs, service architecture, database design, caching, and reliable high-throughput backend infrastructure.',
-    scope: ['API Contracts & Schema Design', 'Distributed Caching (Redis)', 'PostgreSQL Indexing & Optimization', 'Concurrency & Fault Tolerance'],
-    accent: '#3A6D8C', // technical / blue
-  },
-  {
-    number: '02',
-    title: 'Full-Stack Applications',
-    description: 'Production-ready web applications built with rigorous type safety, clean frontend architecture, and resilient state synchronization.',
-    scope: ['React & Next.js Architecture', 'Type-Safe Client-Server Contracts', 'REST & GraphQL APIs', 'Performance Auditing'],
-    accent: '#BD5338', // terracotta / work
-  },
-  {
-    number: '03',
-    title: 'Real-Time Systems',
-    description: 'WebSockets, collaborative document synchronization, conflict-free replicated data types (CRDTs), and low-latency event channels.',
-    scope: ['Yjs & Conflict-Free Resolution', 'State Synchronization <100ms', 'WebSocket Broker Pipelines', 'Real-Time Telemetry'],
-    accent: '#3F6E50', // green / reliability
-  },
-  {
-    number: '04',
-    title: 'AI / Intelligent Applications',
-    description: 'Practical LLM-powered applications, semantic vector retrieval pipelines (FAISS/RAG), and intelligent search systems.',
-    scope: ['Transformer Embeddings & Vector Search', 'Semantic Q&A & Document Ingestion', 'Prompt Architecture & Evaluation', 'FastAPI Microservices'],
-    accent: '#C48229', // mustard / highlights
-  },
-  {
-    number: '05',
-    title: 'Infrastructure Automation',
-    description: 'Infrastructure as Code, configuration orchestration, and server provisioning pipelines for enterprise environments.',
-    scope: ['Ansible Playbooks & Roles', 'OpenStack Cloud Environments', 'Linux Server Provisioning', 'Zero-Downtime Deployments'],
-    accent: '#6B587B', // lavender / tooling
-  },
-];
 
 export const experienceData = [
   {
     number: '01',
-    role: 'AdaniConneX — Cloud Intern',
-    date: 'June 2026 – Present',
+    company: 'AdaniConneX',
+    role: 'Software Engineering Intern',
+    date: 'June 2026 – July 2026',
     location: 'Mumbai, Maharashtra',
     description:
-      'Contributing to infrastructure automation for enterprise data center environments. Developing Ansible playbooks, roles, and inventories for Linux server provisioning. Hands-on with OpenStack, SSH, and Infrastructure as Code.',
-    tags: ['Ansible', 'OpenStack', 'Linux', 'IaC', 'Cloud'],
-  }
+      'Worked on infrastructure automation and monitoring for enterprise data centers across 25+ Linux VMs.',
+    bullets: [
+      'Automated provisioning and configuration of 25+ Linux VMs using reusable Ansible playbooks, roles, and inventories.',
+      'Spearheaded development of a Prometheus-Grafana monitoring pipeline analyzing 8+ infrastructure KPIs across 25+ VMs.',
+      'Engineered an infrastructure health engine processing 10K+ time-series metrics per reporting cycle to detect resource bottlenecks.',
+      'Designed a Grafana-driven SLA reporting framework consolidating 25+ VM health reports into a single dashboard with optimization recommendations.',
+    ],
+    tags: ['Ansible', 'Prometheus', 'Grafana', 'Linux', 'VMs', 'Infrastructure'],
+  },
 ];
 
 export const projects = [
   {
     number: '01',
-    category: 'Full Stack',
+    category: 'Distributed Systems & Real-Time',
     name: 'CodeSync',
     description:
-      'A Google Docs-style collaborative code editor where multiple developers edit the same file in real time. Built on Yjs CRDTs over WebSockets for conflict-free concurrent editing with sub-100ms sync latency across 5 programming languages.',
-    techStack: ['React.js', 'Node.js', 'Express', 'WebSockets', 'Yjs', 'NeonDB', 'Prisma', 'Clerk', 'Tailwind'],
-    metrics: '5 Languages • Sub-100ms Latency • 12 REST APIs',
+      'Designed a distributed real-time collaborative code editor using Yjs CRDTs and WebSockets, supporting concurrent multi-user editing with <100 ms synchronization latency across 5+ languages.',
+    techStack: ['React.js', 'Node.js', 'NeonDB', 'Yjs', 'WebSockets', 'JWT', 'Express.js'],
+    metrics: '<100ms Sync Latency • 12 REST APIs • Docker Isolation',
     highlights: [
-      'Concurrent multi-user editing via Yjs CRDTs over WebSockets',
-      'PostgreSQL schema with 4 composite indexes powering 12 REST APIs',
-      'GitHub/Google OAuth via Clerk + sandboxed code execution',
-      'Code export & import for seamless project continuity',
+      'Designed a distributed real-time collaborative code editor using Yjs CRDTs and WebSockets, supporting concurrent multi-user editing with <100 ms synchronization latency across 5+ languages.',
+      'Architected a scalable backend with Node.js, Express.js, and PostgreSQL, implementing 12 authenticated REST APIs, JWT-based sessions, and 4 composite indexes for efficient data access.',
+      'Orchestrated a Docker-isolated multi-language execution pipeline with resource limits, execution timeouts, and fault-tolerant persistence, enabling reliable code execution and session recovery.',
     ],
     github: 'https://github.com/manavpatel08/codesync.git',
     live: 'https://github.com/manavpatel08/codesync.git',
@@ -122,59 +85,58 @@ export const projects = [
   },
   {
     number: '02',
-    category: 'AI / ML',
+    category: 'AI & Semantic Search',
     name: 'JobKart.ai',
     description:
-      'An AI-powered job matching engine that semantically analyzes your résumé against 100+ job roles using Transformer embeddings and FAISS vector search, then ranks matches by fit score — cutting manual job-hunting time by 60–70%.',
-    techStack: ['Python', 'FastAPI', 'React.js', 'Supabase', 'Transformers', 'FAISS', 'Pandas', 'Tailwind'],
-    metrics: '100+ Roles • 60-70% Time Saved • <2s Queries',
+      'Built an AI-powered job matching platform with FastAPI, React.js, and Supabase, reducing manual job-search effort by 60–70% through automated resume-job matching.',
+    techStack: ['Python', 'FastAPI', 'React.js', 'Supabase', 'Transformers', 'FAISS'],
+    metrics: '60–70% Search Time Saved • <2s Search • 100+ Roles',
     highlights: [
-      'Automated job application tracking eliminating 100+ manual entries/month',
-      'Transformer-based semantic matching + FAISS vector search',
-      'AI resume scoring with chatbot feedback in under 5 seconds',
-      'Personalized skill gap analysis and recommendations',
+      'Built an AI-powered job matching platform with FastAPI, React.js, and Supabase, reducing manual job-search effort by 60–70% through automated resume-job matching.',
+      'Developed a Transformer + FAISS semantic search pipeline, ranking relevant jobs in <2 seconds and improving matching efficiency by 2× over keyword-based search.',
+      'Prototyped AI resume scoring and chatbot feedback, identifying skill gaps and generating personalized recommendations in <5 seconds, while automating 100+ monthly application-tracking entries.',
     ],
     github: 'https://github.com/manavpatel08/JobKart.git',
     live: 'https://job-kart-ai.vercel.app',
-    date: 'Feb 2026',
+    date: 'February 2026',
     image: '/mockups/jobkart.webp',
   },
   {
     number: '03',
-    category: 'Full Stack & AI',
+    category: 'NLP & Information Retrieval',
     name: 'YT Summarizer',
     description:
-      'An LLM-powered summarization system reducing 30–60 min videos to < 1 min summaries. Developed a full-stack app with an NLP pipeline for transcript processing, semantic retrieval, quiz generation, and semantic Q&A over videos.',
+      'Built an LLM-powered summarization system reducing 30–60 minute videos to under 1-minute summaries, saving 90%+ content consumption time.',
     techStack: ['Python', 'FastAPI', 'React.js', 'Gemini API', 'NLP'],
-    metrics: 'Semantic Q&A • PDF Export • NLP Pipeline',
+    metrics: '90%+ Content Time Saved • Semantic Q&A • PDF Export',
     highlights: [
-      'Reduces 30–60 min videos to < 1 min summaries, saving 90%+ consumption time',
-      'Built NLP pipeline for chunking, semantic retrieval, and timestamp extraction',
-      'Enabled semantic Q&A, reducing retrieval time from minutes to seconds',
-      'Full-stack app with bookmarking + PDF export for instant knowledge reuse'
+      'Built an LLM-powered summarization system reducing 30–60 minute videos to under 1-minute summaries, saving 90%+ content consumption time.',
+      'Built an NLP pipeline for transcript processing, chunking, semantic retrieval, quiz generation, and timestamp extraction.',
+      'Enabled semantic Q&A over videos, reducing information retrieval time from minutes to seconds.',
+      'Developed a full-stack application with bookmarking and PDF export for instant knowledge retrieval and reuse.',
     ],
     github: 'https://github.com/AdityaThakkar56/yt-summarizer.git',
     live: 'https://yt-summarizer-green.vercel.app',
-    date: 'Mar 2026',
+    date: 'March 2026',
     image: '/mockups/yt-summarizer.webp',
   },
   {
     number: '04',
-    category: 'Search Engine',
+    category: 'Information Retrieval & Entity Matching',
     name: 'ProfileIQ',
     description:
-      'A multi-platform people search engine querying across 3+ platforms (LinkedIn, ResearchGate, Crunchbase) in a single request. Engineered a retrieval pipeline combining fuzzy matching and LLM-assisted ranking.',
-    techStack: ['Python', 'SerpAPI', 'OpenAI', 'SpaCy', 'Fuzzy Matching', 'Gemini API'],
-    metrics: 'Fuzzy Matching • LLM Ranking • Boolean Logic',
+      'Developed a multi-platform people search engine querying across 3+ platforms including LinkedIn, ResearchGate, and Crunchbase in a single request.',
+    techStack: ['Python', 'SerpAPI', 'OpenAI', 'spaCy', 'Fuzzy Matching', 'Gemini API'],
+    metrics: '3+ Platforms • 70–80% Search Time Saved • Boolean Logic',
     highlights: [
-      'Query across 3+ platforms (LinkedIn, ResearchGate, Crunchbase) simultaneously',
-      'Reduced manual profile search time by 70–80% by automating aggregation',
-      'Converted natural language queries into Boolean search logic',
-      'Combined fuzzy matching and LLM-assisted ranking for accurate discovery'
+      'Developed a multi-platform people search engine querying across 3+ platforms including LinkedIn, ResearchGate, and Crunchbase in a single request.',
+      'Reduced manual profile search time by 70–80% by automating aggregation and ranking.',
+      'Converted natural-language queries into Boolean search logic, improving search precision and relevance.',
+      'Engineered a retrieval and entity-matching pipeline combining fuzzy matching and LLM-assisted ranking.',
     ],
     github: 'https://github.com/manavpatel08',
     live: 'https://redmars.vercel.app/',
-    date: 'Jun 2025',
+    date: 'June 2025',
     image: '/mockups/profileiq.webp',
   },
 ];
@@ -182,18 +144,48 @@ export const projects = [
 export const skills = {
   languages: ['Python', 'Java', 'C++', 'JavaScript', 'TypeScript', 'SQL'],
   frontend: ['React.js', 'Next.js', 'HTML5', 'CSS3'],
-  backend: ['Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'WebSockets', 'JWT'],
-  databases: ['PostgreSQL', 'MongoDB', 'Redis', 'Supabase', 'Prisma', 'FAISS'],
+  backend: ['Node.js', 'FastAPI', 'REST APIs', 'LLD', 'API Design'],
+  databases: ['PostgreSQL', 'MongoDB', 'Redis', 'Supabase', 'Prisma ORM'],
   aiml: ['TensorFlow', 'Keras', 'Scikit-learn', 'NLP', 'Transformers', 'LSTM', 'RAG'],
-  cloud: ['Linux', 'Ansible', 'OpenStack', 'AWS'],
-  tools: ['Git', 'GitHub', 'Postman', 'VS Code', 'Jupyter', 'Colab', 'Kaggle', 'Vercel', 'Render'],
+  cloud: ['Git', 'GitHub', 'Linux', 'AWS', 'Docker', 'CI/CD', 'Ansible'],
 };
+
+export const servicesData = [
+  {
+    number: '01',
+    title: 'Backend Systems',
+    description: 'Scalable APIs, authentication, database architecture, caching, and backend services.',
+    scope: ['API Design & Architecture', 'Authentication & JWT Sessions', 'Database Indexing & Query Optimization', 'Distributed Caching (Redis)'],
+    accent: '#3A6D8C', // muted blue
+  },
+  {
+    number: '02',
+    title: 'Real-Time Systems',
+    description: 'WebSockets, CRDTs, collaborative applications, event-driven communication, and low-latency systems.',
+    scope: ['CRDT Synchronization (Yjs)', 'WebSockets & Event Channels', 'Low-Latency (<100ms) Sync', 'Session Recovery & State Persistence'],
+    accent: '#3F6E50', // dusty teal / sage
+  },
+  {
+    number: '03',
+    title: 'AI-Powered Applications',
+    description: 'Semantic search, RAG pipelines, LLM integrations, NLP systems, and intelligent product features.',
+    scope: ['Semantic Vector Search (FAISS)', 'Transformer & NLP Pipelines', 'LLM Agents & Retrieval (RAG)', 'FastAPI Microservice Integration'],
+    accent: '#C48229', // muted yellow
+  },
+  {
+    number: '04',
+    title: 'Full-Stack Products',
+    description: 'Production-oriented web applications with React, Node.js, FastAPI, PostgreSQL, and modern infrastructure.',
+    scope: ['React & Next.js Architecture', 'End-to-End Type Safety', 'Docker-Isolated Execution Pipelines', 'Production CI/CD & Deployments'],
+    accent: '#BD5338', // soft terracotta
+  },
+];
 
 export const stats = [
   { value: 9.37, label: 'CPI at PDEU', suffix: '/10', decimals: 2 },
   { value: 1629, label: 'Codeforces Rating', suffix: '', decimals: 0 },
   { value: 1924, label: 'LeetCode Rating', suffix: '', decimals: 0 },
-  { value: 3, label: 'Major Projects Built', suffix: '+', decimals: 0 },
+  { value: 3, label: 'Production Projects Built', suffix: '+', decimals: 0 },
 ];
 
 export const achievements = [
@@ -230,14 +222,13 @@ export const techMarqueeRow1 = [
   { name: 'C++', tagline: 'Competitive' },
   { name: 'TypeScript', tagline: 'Type Safety' },
   { name: 'Git', tagline: 'Version Control' },
-  { name: 'Express', tagline: 'Backend' },
-  { name: 'React', tagline: 'Frontend' },
+  { name: 'Express.js', tagline: 'Backend' },
+  { name: 'React.js', tagline: 'Frontend' },
   { name: 'Node.js', tagline: 'Runtime' },
   { name: 'PostgreSQL', tagline: 'Database' },
   { name: 'Docker', tagline: 'Containers' },
   { name: 'Linux', tagline: 'Systems' },
   { name: 'JavaScript', tagline: 'Full Stack' },
-  { name: 'Tailwind', tagline: 'Styling' },
   { name: 'Java', tagline: 'Enterprise' },
 ];
 
@@ -249,86 +240,11 @@ export const techMarqueeRow2 = [
   { name: 'REST APIs', tagline: 'Integration' },
   { name: 'FastAPI', tagline: 'Python API' },
   { name: 'Redis', tagline: 'Caching' },
-  { name: 'OpenStack', tagline: 'Cloud Infra' },
+  { name: 'Ansible', tagline: 'Automation' },
   { name: 'WebSockets', tagline: 'Real-time' },
   { name: 'Next.js', tagline: 'Framework' },
-  { name: 'Ansible', tagline: 'Automation' },
-  { name: 'Prisma', tagline: 'ORM' },
+  { name: 'Supabase', tagline: 'Cloud DB' },
+  { name: 'Prisma ORM', tagline: 'ORM' },
 ];
 
-export const scopeData = {
-  headline: 'Architectural Scope & Engagement Boundaries',
-  summary:
-    'Clear contracts, production-ready deliverables, and disciplined engineering hygiene. Designed for organizations needing dependable distributed backends, low-latency microservices, or intelligent AI pipelines.',
-  models: [
-    {
-      number: '01',
-      title: 'Full-Time Engineering Roles',
-      tagline: 'High-Impact Ownership',
-      description:
-        'Software Engineer / Backend / Distributed Systems roles with end-to-end ownership from architecture design to production telemetry.',
-      deliverables: [
-        'Production backend microservices & distributed caches',
-        'Database indexing, schema migrations, and performance audits',
-        'Clean API contracts (REST, GraphQL, WebSockets)',
-        'Infrastructure automation & deployment playbooks',
-      ],
-      badge: 'Full-Time',
-      accent: '#BD5338',
-    },
-    {
-      number: '02',
-      title: 'Contract Systems Buildout',
-      tagline: 'Focused Execution',
-      description:
-        'Direct project-based execution for zero-to-one infrastructure, real-time collaboration engines, or custom RAG/search pipelines.',
-      deliverables: [
-        'Real-time synchronization engines (CRDTs, WebSockets)',
-        'LLM & vector retrieval pipelines (FAISS, LangChain, FastAPI)',
-        'Custom multi-platform search engines & fuzzy rankers',
-        'Cloud provisioning pipelines (Linux, OpenStack, Ansible)',
-      ],
-      badge: 'Milestone Contract',
-      accent: '#3A6D8C',
-    },
-    {
-      number: '03',
-      title: 'Architecture Advisory & Review',
-      tagline: 'Technical Hygiene',
-      description:
-        'System design audits, query optimization, high-throughput scaling strategies, and architectural risk assessments.',
-      deliverables: [
-        'Bottleneck discovery & latency reduction audits',
-        'Relational & NoSQL schema design reviews',
-        'Fault tolerance & graceful degradation strategies',
-        'Concurrency & event-driven architecture design',
-      ],
-      badge: 'Advisory',
-      accent: '#3F6E50',
-    },
-  ],
-  standards: [
-    {
-      label: 'Sync & Latency SLA',
-      value: '< 100ms',
-      detail: 'State replication and cached endpoints engineered for low-latency feedback.',
-    },
-    {
-      label: 'Type Safety & Contracts',
-      value: '100% Strict',
-      detail: 'End-to-end type validation across client, server, and database layers.',
-    },
-    {
-      label: 'Deployment Hygiene',
-      value: 'Zero-Downtime',
-      detail: 'Automated CI/CD, declarative playbooks, and rolling migration support.',
-    },
-    {
-      label: 'System Resilience',
-      value: '99.9% Fault Tolerance',
-      detail: 'Idempotency, distributed circuit breakers, and graceful fallback paths.',
-    },
-  ],
-};
-
-export const navLinks = ['About', 'Experience', 'Projects', 'Skills', 'Services', 'Scope', 'Contact'];
+export const navLinks = ['About', 'Experience', 'Projects', 'Skills', 'Services', 'Contact'];

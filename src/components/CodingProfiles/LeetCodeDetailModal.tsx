@@ -63,12 +63,11 @@ export const LeetCodeDetailModal: React.FC<LeetCodeDetailModalProps> = ({ onClos
 
       {/* Expanded Modal Content */}
       <motion.div
-        layoutId="profile-card-container-leetcode"
         data-lenis-prevent
         initial={{ opacity: 0, scale: 0.95, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 12 }}
-        transition={{ type: 'spring', stiffness: 360, damping: 28 }}
+        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl bg-white border border-black/10 shadow-2xl p-5 sm:p-7 md:p-8 text-left"
         onClick={(e) => e.stopPropagation()}
       >

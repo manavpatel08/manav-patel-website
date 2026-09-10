@@ -9,10 +9,9 @@ import MarqueeSection from '../sections/MarqueeSection';
 import AboutSection from '../sections/AboutSection';
 import ExperienceSection from '../sections/ExperienceSection';
 import ProjectsSection from '../sections/ProjectsSection';
-import CompetitiveProgrammingSection from '../sections/CompetitiveProgrammingSection';
 import SkillsSection from '../sections/SkillsSection';
+import CompetitiveProgrammingSection from '../sections/CompetitiveProgrammingSection';
 import ServicesSection from '../sections/ServicesSection';
-import ScopeSection from '../sections/ScopeSection';
 import ContactSection from '../sections/ContactSection';
 import Footer from '../sections/Footer';
 import SectionTransition from '../components/SectionTransition';
@@ -37,7 +36,7 @@ const Home: React.FC = () => {
         <SectionTransition
           from="01 / ABOUT"
           to="02 / EXPERIENCE"
-          label="SYSTEM ARCHITECTURE → DATA CENTER IaC"
+          label="SYSTEM ARCHITECTURE → INFRASTRUCTURE AUTOMATION"
           type="diagram"
         />
 
@@ -51,14 +50,13 @@ const Home: React.FC = () => {
           type="timeline"
         />
 
-        {/* 03 — PROJECTS & ALGORITHMIC DEPTH */}
+        {/* 03 — PROJECTS */}
         <ProjectsSection />
-        <CompetitiveProgrammingSection />
 
         <SectionTransition
           from="03 / PROJECTS"
           to="04 / SKILLS"
-          label="SYSTEM IMPLEMENTATIONS → CORE CAPABILITIES"
+          label="PRODUCTION SYSTEMS → TECHNICAL PROFICIENCIES"
           type="technology"
         />
 
@@ -67,28 +65,28 @@ const Home: React.FC = () => {
 
         <SectionTransition
           from="04 / SKILLS"
-          to="05 / SERVICES"
-          label="TECHNICAL PROFICIENCIES → DELIVERED SERVICES"
+          to="05 / PROFILES"
+          label="CORE CAPABILITIES → ALGORITHMIC BENCHMARKS"
           type="capability"
         />
 
-        {/* 05 — SERVICES */}
-        <ServicesSection />
+        {/* 05 — CF & LEETCODE (ALGORITHMIC PROFILES) */}
+        <CompetitiveProgrammingSection />
 
         <SectionTransition
-          from="05 / SERVICES"
-          to="06 / SCOPE"
-          label="DELIVERED SOLUTIONS → ENGAGEMENT & SLAs"
+          from="05 / PROFILES"
+          to="06 / SERVICES"
+          label="ALGORITHMIC RIGOR → WHAT I BUILD"
           type="engagement"
         />
 
-        {/* 06 — SCOPE */}
-        <ScopeSection />
+        {/* 06 — SERVICES */}
+        <ServicesSection />
 
         <SectionTransition
-          from="06 / SCOPE"
+          from="06 / SERVICES"
           to="07 / CONTACT"
-          label="SPECIFICATIONS → DIRECT HANDSHAKE"
+          label="ENGINEERING SERVICES → DIRECT CONTACT"
           type="handshake"
         />
 

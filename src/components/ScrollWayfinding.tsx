@@ -5,8 +5,8 @@ const sections = [
   { id: 'experience', num: '02', label: 'Experience' },
   { id: 'projects', num: '03', label: 'Projects' },
   { id: 'skills', num: '04', label: 'Skills' },
-  { id: 'services', num: '05', label: 'Services' },
-  { id: 'scope', num: '06', label: 'Scope' },
+  { id: 'competitive', num: '05', label: 'Profiles' },
+  { id: 'services', num: '06', label: 'Services' },
   { id: 'contact', num: '07', label: 'Contact' },
 ];
 
@@ -46,11 +46,11 @@ export const ScrollWayfinding: React.FC = () => {
       aria-label="Section navigation progress"
     >
       {/* Current Step Counter */}
-      <div className="bg-[#FDFBF7]/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-black/8 shadow-sm font-mono text-[10px] tracking-wider text-[#57606A] flex items-center gap-2 pointer-events-auto">
+      <div className="bg-[#FDFBF7]/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-black/8 shadow-sm font-mono text-[10px] tracking-wider text-[#524F4A] flex items-center gap-2 pointer-events-auto">
         <span className="font-bold text-[#141413]">{activeSection.num}</span>
-        <span className="text-[#8C959F]">/</span>
-        <span className="text-[#8C959F]">07</span>
-        <span className="text-[#8C959F]">&bull;</span>
+        <span className="text-[#827E77]">/</span>
+        <span className="text-[#827E77]">07</span>
+        <span className="text-[#827E77]">&bull;</span>
         <span className="text-[#BD5338] font-bold uppercase">{activeSection.label}</span>
       </div>
 
