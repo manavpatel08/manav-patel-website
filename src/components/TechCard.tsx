@@ -19,3 +19,5 @@ const TechCard: React.FC<TechCardProps> = ({ name, tagline }) => {
 };
 
 export default TechCard;
+
+// done

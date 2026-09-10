@@ -241,3 +241,5 @@ export const RatingGraph: React.FC<RatingGraphProps> = ({
 };
 
 export default RatingGraph;
+
+// done

@@ -59,3 +59,5 @@ const WordSpan: React.FC<WordSpanProps> = ({ word, index, total, scrollYProgress
 };
 
 export default AnimatedText;
+
+// done

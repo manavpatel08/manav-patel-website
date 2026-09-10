@@ -38,3 +38,5 @@ const LenisProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 };
 
 export default LenisProvider;
+
+// done
